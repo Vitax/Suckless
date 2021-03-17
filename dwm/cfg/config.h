@@ -17,24 +17,21 @@ static const int topbar = 1;  /* 0 means bottom bar */
 static const float resizestepsm = 0.01;
 static const float resizestepssm = resizestepsm * (float)9 / 16;
 
-static const char *fonts[] = 
-    {
-        "Iosevka:pixelsize=16;antialias=true"
-    };
+static const char *fonts[] = {
+	"Iosevka:pixelsize=16;antialias=true"
+};
 
 typedef struct {
   const char *name;
   const void *cmd;
 } Sp;
 
-const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "120x34", "-e",
-                        "tmux", "new", "-A",     "-s", "spterm", NULL};
-const char *spcmd2[] = {"st",     "-n", "spfm",   "-g",
-                        "144x41", "-e", "ranger", NULL};
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", "-e", "tmux", "new", "-A", "-s", "spterm", NULL};
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL};
 const char *spcmd3[] = {"keepass.sh", NULL};
 
 static Sp scratchpads[] = {
-    /* name          cmd  */
+    /* name, cmd  */
     {"spterm", spcmd1},
     {"spranger", spcmd2},
     {"KeePass2", spcmd3},
@@ -49,7 +46,7 @@ static const Rule rules[] = {
      *	WM_NAME(STRING) = title
      */
 
-    /* class instance title tags,mask iscentered isfloating monitor */
+    /* class/instance, title, tags, mask, iscentered, isfloating, monitor */
     {"FileSearch", NULL, NULL, 0, 1, 1, -1},
     {"feh", NULL, NULL, 0, 1, 1, -1},
     {"pcmanfm", NULL, NULL, 0, 1, 1, -1},
@@ -67,7 +64,7 @@ static const Rule rules[] = {
 
 /* layout(s) */
 static const float mfact = 0.50;  /* factor of master area size [0.05..0.95] */
-/* static const float smfact = 0.00; /1* factor of tiled clients [0.00..0.95] *1/ */
+/* static const float smfact = 0.00; /1* factor of tiled clients [0.05..0.95] *1/ */
 
 static const int nmaster = 1; /* number of clients in master area */
 static const int resizehints =
@@ -85,25 +82,28 @@ static const Layout layouts[] = {
 #define AltMask Mod1Mask
 #define SuperMask Mod4Mask
 
-#define TAGKEYS(KEY, TAG)                                                      \
-    {AltMask, KEY, view, {.ui = 1 << TAG}},                                    \
+#define TAGKEYS(KEY, TAG) \
+    {AltMask, KEY, view, {.ui = 1 << TAG}}, \
     {AltMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
 
 static Key keys[] = {
-    /* modifier                     key        function        argument */
+    /* modifier, key, function, argument */
     {SuperMask | ControlMask, XK_b, togglebar, {0}},
 
-    {AltMask, XK_k, focusstack, {.i = -1}},
-    {AltMask, XK_j, focusstack, {.i = +1}},
+	{ AltMask, XK_j, focusstackvis, {.i = +1 } },
+	{ AltMask, XK_k, focusstackvis, {.i = -1 } },
+
+	{ AltMask|ShiftMask, XK_j, focusstackhid, {.i = +1 } },
+	{ AltMask|ShiftMask, XK_k, focusstackhid, {.i = -1 } },
+
+	{ AltMask, XK_s, show, {0} },
+	{ AltMask|ControlMask, XK_m, hide, {0} },
 
     {AltMask, XK_h, rotatestack, {.i = -1}},
     {AltMask, XK_l, rotatestack, {.i = +1}},
 
     {AltMask, XK_i, incnmaster, {.i = +1}},
     {AltMask, XK_d, incnmaster, {.i = -1}},
-
-    /* {AltMask | ShiftMask, XK_j, setsmfact, {.f = -resizestepssm}}, */
-    /* {AltMask | ShiftMask, XK_k, setsmfact, {.f = +resizestepssm}}, */
 
     {AltMask | ShiftMask, XK_h, setmfact, {.f = -resizestepsm}},
     {AltMask | ShiftMask, XK_l, setmfact, {.f = +resizestepsm}},
@@ -152,6 +152,7 @@ static Button buttons[] = {
     {ClkClientWin, AltMask, Button1, movemouse, {0}},
     {ClkClientWin, AltMask, Button2, togglefloating, {0}},
     {ClkClientWin, AltMask, Button3, resizemouse, {0}},
+	{ClkWinTitle, 0, Button1, togglewin, {0} },
     {ClkTagBar, 0, Button1, view, {0}},
     {ClkTagBar, 0, Button3, toggleview, {0}},
     {ClkTagBar, AltMask, Button1, tag, {0}},
