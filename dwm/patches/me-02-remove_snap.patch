@@ -1,0 +1,48 @@
+From c851f47eddd6eca2f73d1586dfa7c1be9dadf80e Mon Sep 17 00:00:00 2001
+From: vitax <caglar.oezel@googlemail.com>
+Date: Wed, 11 Mar 2020 01:07:03 +0100
+Subject: [PATCH 2/2] remove snap
+
+---
+ dwm.c | 18 ------------------
+ 1 file changed, 18 deletions(-)
+
+diff --git a/dwm.c b/dwm.c
+index b9e14c0..f234acb 100644
+--- a/dwm.c
++++ b/dwm.c
+@@ -1168,17 +1168,6 @@ movemouse(const Arg *arg)
+ 
+ 			nx = ocx + (ev.xmotion.x - x);
+ 			ny = ocy + (ev.xmotion.y - y);
+-			if (abs(selmon->wx - nx) < snap)
+-				nx = selmon->wx;
+-			else if (abs((selmon->wx + selmon->ww) - (nx + WIDTH(c))) < snap)
+-				nx = selmon->wx + selmon->ww - WIDTH(c);
+-			if (abs(selmon->wy - ny) < snap)
+-				ny = selmon->wy;
+-			else if (abs((selmon->wy + selmon->wh) - (ny + HEIGHT(c))) < snap)
+-				ny = selmon->wy + selmon->wh - HEIGHT(c);
+-			if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
+-			&& (abs(nx - c->x) > snap || abs(ny - c->y) > snap))
+-				togglefloating(NULL);
+ 			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
+ 				resize(c, nx, ny, c->w, c->h, 1);
+ 			break;
+@@ -1322,13 +1311,6 @@ resizemouse(const Arg *arg)
+ 
+ 			nw = MAX(ev.xmotion.x - ocx - 2 * c->bw + 1, 1);
+ 			nh = MAX(ev.xmotion.y - ocy - 2 * c->bw + 1, 1);
+-			if (c->mon->wx + nw >= selmon->wx && c->mon->wx + nw <= selmon->wx + selmon->ww
+-			&& c->mon->wy + nh >= selmon->wy && c->mon->wy + nh <= selmon->wy + selmon->wh)
+-			{
+-				if (!c->isfloating && selmon->lt[selmon->sellt]->arrange
+-				&& (abs(nw - c->w) > snap || abs(nh - c->h) > snap))
+-					togglefloating(NULL);
+-			}
+ 			if (!selmon->lt[selmon->sellt]->arrange || c->isfloating)
+ 				resize(c, c->x, c->y, nw, nh, 1);
+ 			break;
+-- 
+2.25.1
+
