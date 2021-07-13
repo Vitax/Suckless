@@ -3,22 +3,19 @@
 #include <dwm.h>
 
 /* appearance */
-static const unsigned int gappx = 8;   /* gaps between windows */
-static const unsigned int borderpx = 2; /* border pixel of windows */
+static const unsigned int gappx = 30; /* gaps between windows */
+static const unsigned int borderpx = 3; /* border pixel of windows */
 
-static const int vertpadbar = 2;
-static const int horizpadbar = 4;
+static const int vertpadbar = 4;
+static const int horizpadbar = 8;
 
-static const int barheight = 24; /* user defined bar height */
+static const int barheight = 28; /* user defined bar height */
 
 static const int showbar = 1; /* 0 means no bar */
 static const int topbar = 1;  /* 0 means bottom bar */
 
-static const float resizestepsm = 0.01;
-static const float resizestepssm = resizestepsm * (float)9 / 16;
-
 static const char *fonts[] = {
-	"Iosevka:pixelsize=16;antialias=true"
+    "Iosevka:pixelsize=16;antialias=true"
 };
 
 typedef struct {
@@ -26,15 +23,15 @@ typedef struct {
   const void *cmd;
 } Sp;
 
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", "-e", "tmux", "new", "-A", "-s", "spterm", NULL};
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL};
-const char *spcmd3[] = {"keepass.sh", NULL};
+const char *spcmd1[] = {"st", "-n", "spterm", "-g", "144x41", "-e", "tmux", "new", "-A", "-s", "spterm", NULL};
+const char *spcmd2[] = {"st", "-n", "spfm", "-g", "120x34", "-e", "ranger", NULL};
+const char *spcmd3[] = {"keepassxc", NULL};
 
 static Sp scratchpads[] = {
     /* name, cmd  */
     {"spterm", spcmd1},
     {"spranger", spcmd2},
-    {"KeePass2", spcmd3},
+    {"KeePassXC", spcmd3},
 };
 
 /* tagging */
@@ -59,23 +56,21 @@ static const Rule rules[] = {
     {"htop", NULL, NULL, 0, 1, 1, -1},
     {NULL, "spterm", NULL, SPTAG(0), 1, 1, -1},
     {NULL, "spfm", NULL, SPTAG(1), 1, 1, -1},
-    {"KeePass2", NULL, NULL, SPTAG(2), 1, 1, -1},
+    {"KeePassXC", NULL, NULL, SPTAG(2), 1, 1, -1},
 };
 
 /* layout(s) */
 static const float mfact = 0.50;  /* factor of master area size [0.05..0.95] */
-/* static const float smfact = 0.00; /1* factor of tiled clients [0.05..0.95] *1/ */
 
 static const int nmaster = 1; /* number of clients in master area */
-static const int resizehints =
-    1; /* 1 means respect size hints in tiled resizals */
-/* static const unsigned int minwsz = 100; /1* min height of a client for smfact *1/ */
+static const int resizehints = 1; /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
     {"[T]", tile},
-    {"><>", NULL}, // floating
+    {"><>", NULL},
     {"[M]", monocle},
+    {"TTT", bstack},
 };
 
 /* key definitions */
@@ -90,14 +85,14 @@ static Key keys[] = {
     /* modifier, key, function, argument */
     {SuperMask | ControlMask, XK_b, togglebar, {0}},
 
-	{ AltMask, XK_j, focusstackvis, {.i = +1 } },
-	{ AltMask, XK_k, focusstackvis, {.i = -1 } },
+    { AltMask, XK_j, focusstackvis, {.i = +1 } },
+    { AltMask, XK_k, focusstackvis, {.i = -1 } },
+    
+    { AltMask|ShiftMask, XK_j, focusstackhid, {.i = +1 } },
+    { AltMask|ShiftMask, XK_k, focusstackhid, {.i = -1 } },
 
-	{ AltMask|ShiftMask, XK_j, focusstackhid, {.i = +1 } },
-	{ AltMask|ShiftMask, XK_k, focusstackhid, {.i = -1 } },
-
-	{ AltMask, XK_s, show, {0} },
-	{ AltMask|ControlMask, XK_m, hide, {0} },
+    { AltMask, XK_s, show, {0} },
+    { AltMask|ControlMask, XK_m, hide, {0} },
 
     {AltMask, XK_h, rotatestack, {.i = -1}},
     {AltMask, XK_l, rotatestack, {.i = +1}},
@@ -105,17 +100,18 @@ static Key keys[] = {
     {AltMask, XK_i, incnmaster, {.i = +1}},
     {AltMask, XK_d, incnmaster, {.i = -1}},
 
-    {AltMask | ShiftMask, XK_h, setmfact, {.f = -resizestepsm}},
-    {AltMask | ShiftMask, XK_l, setmfact, {.f = +resizestepsm}},
-
+    {AltMask|ShiftMask, XK_h, setmfact, {.f = -0.005}},
+    {AltMask|ShiftMask, XK_l, setmfact, {.f = +0.005}},
+    
     {AltMask, XK_Tab, view, {0}},
 
-    {AltMask | ShiftMask, XK_c, killclient, {0}},
+    {AltMask|ShiftMask, XK_c, killclient, {0}},
     {AltMask, XK_F4, killclient, {0}},
 
     {AltMask, XK_t, setlayout, {.v = &layouts[0]}},
     {AltMask, XK_f, setlayout, {.v = &layouts[1]}},
     {AltMask, XK_m, setlayout, {.v = &layouts[2]}},
+    {AltMask, XK_u, setlayout, {.v = &layouts[3]}},
 
     {AltMask | ShiftMask, XK_y, togglescratch, {.ui = 0}},
     {AltMask | ShiftMask, XK_u, togglescratch, {.ui = 1}},
@@ -152,7 +148,7 @@ static Button buttons[] = {
     {ClkClientWin, AltMask, Button1, movemouse, {0}},
     {ClkClientWin, AltMask, Button2, togglefloating, {0}},
     {ClkClientWin, AltMask, Button3, resizemouse, {0}},
-	{ClkWinTitle, 0, Button1, togglewin, {0} },
+    {ClkWinTitle, 0, Button1, togglewin, {0} },
     {ClkTagBar, 0, Button1, view, {0}},
     {ClkTagBar, 0, Button3, toggleview, {0}},
     {ClkTagBar, AltMask, Button1, tag, {0}},

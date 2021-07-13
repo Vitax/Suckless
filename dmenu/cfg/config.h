@@ -5,12 +5,12 @@
 static int topbar = 1;
 
 /* set border width of menu */
-static const unsigned int border_width = 6;
+static const unsigned int border_width = 2;
 
 /* -fn option overrides fonts[0]; default X11 font or font set */
-static const char *fonts[] = 
+static const char *fonts[] =
 {
-    "DejaVu Sans Mono:pixelsize=16:antialias=true"
+    "Iosevka:pixelsize=16:antialias=true"
 };
 
 /* -p  option; prompt to the left of input field */
@@ -20,7 +20,7 @@ static const char *prompt = "";
 
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
 static unsigned int lines = 0;
-static unsigned int lineheight = 0;
+static unsigned int lineheight = 1.15;
 
 /*
  * Characters not considered part of a word while deleting words

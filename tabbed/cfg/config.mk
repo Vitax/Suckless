@@ -1,8 +1,6 @@
 # tabbed version
 VERSION = 0.6
 
-# Customize below to fit your system
-
 # paths
 PREFIX = ${HOME}/.local
 MANPREFIX = ${PREFIX}/share/man
@@ -14,32 +12,23 @@ X11LIB = /usr/X11R6/lib
 FREETYPELIBS = -lfontconfig -lXft
 
 # Linux
-# FREETYPEINC = /usr/include/freetype2
+#FREETYPEINC = /usr/include/freetype2
 
 # OpenBSD (uncomment)
-# FREETYPEINC = ${X11INC}/freetype2
+FREETYPEINC = ${X11INC}/freetype2
 
 # FreeBSD
-FREETYPEINC = /usr/local/include/freetype2
+# FREETYPEINC = /usr/local/include/freetype2
 
 # includes and libs
-INCS = -I. -I/usr/include \
-	   -I$(X11INC)  \
-	   -I${FREETYPEINC} \
-	   -I${XDG_CACHE_HOME}/themes/
+INCS = -I. -I/usr/include -I$(X11INC) -I${FREETYPEINC} -I${XDG_CACHE_HOME}/themes/
 
-LIBS = -L/usr/lib -lc -L${X11LIB} \
-	   -lX11 ${FREETYPELIBS}
+LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 ${FREETYPELIBS}
 
 # flags
-CPPFLAGS = -DVERSION=\"${VERSION}\" \
-		   -D_DEFAULT_SOURCE
+CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE
 CFLAGS = -std=c99 -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
 LDFLAGS = -s ${LIBS}
-
-# Solaris
-#CFLAGS = -fast ${INCS} -DVERSION=\"${VERSION}\"
-#LDFLAGS = ${LIBS}
 
 # compiler and linker
 CC = cc
