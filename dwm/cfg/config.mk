@@ -7,8 +7,13 @@ VERSION = 6.2
 PREFIX = ${HOME}/.local
 MANPREFIX = ${PREFIX}/share/man
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+# OpenBSD
+# X11INC = /usr/X11R6/include
+# X11LIB = /usr/X11R6/lib
+
+# FreeBSD
+X11INC = /usr/local/include
+X11LIB = /usr/local/lib
 
 # Xinerama, comment if you don't want it
 XINERAMALIBS  = -lXinerama
@@ -20,11 +25,8 @@ FREETYPELIBS = -lfontconfig -lXft
 # Linux
 #FREETYPEINC = /usr/include/freetype2
 
-# OpenBSD (uncomment)
+# BSD (uncomment)
 FREETYPEINC = ${X11INC}/freetype2
-
-# FreeBSD
-# FREETYPEINC = /usr/local/include/freetype2
 
 # includes and libs
 INCS = -I${X11INC} -I${FREETYPEINC} -I${XDG_CACHE_HOME}/themes/

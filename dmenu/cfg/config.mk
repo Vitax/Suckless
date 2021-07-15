@@ -3,8 +3,13 @@ VERSION = 4.8
 PREFIX = ${HOME}/.local
 MANPREFIX = ${PREFIX}/share/man
 
-X11INC = /usr/X11R6/include
-X11LIB = /usr/X11R6/lib
+# OpenBSD
+# X11INC = /usr/X11R6/include
+# X11LIB = /usr/X11R6/lib
+
+# FreeBSD
+X11INC = /usr/local/include
+X11LIB = /usr/local/lib
 
 XINERAMALIBS  = -lXinerama
 XINERAMAFLAGS = -DXINERAMA
@@ -15,7 +20,7 @@ FREETYPELIBS = -lfontconfig -lXft
 FREETYPELIBS = -lfontconfig -lXft
 #FREETYPEINC = /usr/include/freetype2
 
-# --------- OPENBSD ---------------
+# --------- BSD ---------------
 FREETYPEINC = $(X11INC)/freetype2
 
 INCS = -I${X11INC} \

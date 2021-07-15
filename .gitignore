@@ -61,6 +61,7 @@ dkms.conf
 # custom extensions
 dwm/dwm
 st/st
+slock/slock
 dmenu/dmenu
 tabbed/tabbed
 sent/sent

@@ -4,13 +4,11 @@
 
 /*
  * appearance
- *
- * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 
-static char font[] = "Iosevka:pixelsize=17";
+static char font[] = "FantasqueSansMono Nerd Font:pixelsize=18:antialias=true:autohint=full";
+/* static char font[] = "Iosevka:pixelsize=16:antialias=true:autohint=full"; */
 /* static char font[] = "Hermit:pixelsize=18:antialias=true:autohint=true"; */
-/* static char font[] = "Iosevka:pixelsize=16:antialias=true"; */
 /* static char font[] = "DejaVu Sans Mono:pixelsize=16:antialias=true:autohint=full"; */
 
 // plumber patch
@@ -19,7 +17,7 @@ static char *plumb_cmd = "opn";
 // look into using scroll later!
 char *scroll = NULL;
 
-static int borderpx = 12;
+static int borderpx = 24;
 
 // security concerns regarding window operations
 // see: https://git.suckless.org/st/commit/a2a704492b9f4d2408d180f7aeeacf4c789a1d67.html
