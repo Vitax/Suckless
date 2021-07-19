@@ -1,10 +1,7 @@
-# slock version
 VERSION = 1.4
 
-# Customize below to fit your system
-
 # paths
-PREFIX = ${HOME}/.local
+PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
 
 # OpenBSD
@@ -15,23 +12,39 @@ MANPREFIX = ${PREFIX}/share/man
 X11INC = /usr/local/include
 X11LIB = /usr/local/lib
 
-# includes and libs
-INCS = -I. -I/usr/include -I${X11INC}
-LIBS = -L/usr/lib -lc -lcrypt -L${X11LIB} -lX11 -lXext -lXrandr
+XINERAMALIBS  = -lXinerama
+XINERAMAFLAGS = -DXINERAMA
+FREETYPELIBS = -lXft
 
-# flags
-CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE -DHAVE_SHADOW_H
-CFLAGS = -O2 -pipe -std=c99 -pedantic -Wall -Wno-deprecated-declarations ${INCS} ${CPPFLAGS}
+# OpenBSD
+# FREETYPEINC = /usr/X11R6/include/freetype2
+
+# FreeBSD
+FREETYPEINC = /usr/local/include/freetype2
+
+# Linux
+# FREETYPEINC = /usr/include/freetype2
+
+INCS = -I. -I/usr/include -I${X11INC} -I${FREETYPEINC}
+
+CFLAGS = -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
 LDFLAGS = -s ${LIBS}
+
+# OpenBSD
+# LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 -lXext -lXrandr ${XINERAMALIBS} ${FREETYPELIBS}
+# Linux
+LIBS = -L/usr/lib -lc -lcrypt -L${X11LIB} -lX11 -lXext -lXrandr ${XINERAMALIBS} ${FREETYPELIBS}
+
+# Linux
+# CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE -DHAVE_SHADOW_H ${XINERAMAFLAGS}
+# OpenBSD / FreeBSD
+CPPFLAGS = -DVERSION=\"${VERSION}\" -D_BSD_SOURCE ${XINERAMAFLAGS} -DHAVE_BSD_AUTH
+# NetBSD
+# CPPFLAGS = -DVERSION=\"${VERSION}\" -D_BSD_SOURCE -D_NETBSD_SOURCE ${XINERAMAFLAGS}
+
+# OpenBSD
+# COMPATSRC =
+# Linux / FreeBSD / NetBSD
 COMPATSRC = explicit_bzero.c
 
-# On OpenBSD and Darwin remove -lcrypt from LIBS
-#LIBS = -L/usr/lib -lc -L${X11LIB} -lX11 -lXext -lXrandr
-# On *BSD remove -DHAVE_SHADOW_H from CPPFLAGS
-# On NetBSD add -D_NETBSD_SOURCE to CPPFLAGS
-#CPPFLAGS = -DVERSION=\"${VERSION}\" -D_BSD_SOURCE -D_NETBSD_SOURCE
-# On OpenBSD set COMPATSRC to empty
-#COMPATSRC =
-
-# compiler and linker
 CC = cc
