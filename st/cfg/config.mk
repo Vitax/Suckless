@@ -1,40 +1,48 @@
-# st version
-VERSION = 0.8.4
+VERSION = 0.8.2
 
-# paths
 PREFIX = ${HOME}/.local
 MANPREFIX = $(PREFIX)/share/man
 
-PKG_CONFIG = pkg-config
-
-# OpenBSD
+# OpenBSD / Linux
 # X11INC = /usr/X11R6/include
 # X11LIB = /usr/X11R6/lib
+
+# NetBSD
+# X11INC = /usr/X11R7/include
+# X11LIB = /usr/X11R7/lib
 
 # FreeBSD
 X11INC = /usr/local/include
 X11LIB = /usr/local/lib
 
-# includes and libs
 INCS = -I$(X11INC) \
-	   `$(PKG_CONFIG) --cflags fontconfig` \
-	   `$(PKG_CONFIG) --cflags freetype2` \
+       `pkg-config --cflags fontconfig` \
+       `pkg-config --cflags freetype2` \
 	   -I${XDG_CACHE_HOME}/themes
 
-# LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft \
-#        `$(PKG_CONFIG) --libs fontconfig` \
-#        `$(PKG_CONFIG) --libs freetype2`
+# Linux
+# CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
+# OpenBSD
+CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
+# NetBSD
+# CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE -D_NETBSD_SOURCE
 
-# flags
-CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
-STCFLAGS = $(INCS) $(STCPPFLAGS) $(CPPFLAGS) $(CFLAGS)
+# Linux
+# LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender \
+# 	   `pkg-config --libs fontconfig` \
+# 	   `pkg-config --libs freetype2`
+
+# OpenBSD
+LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft -lXrender \
+		`pkg-config --libs fontconfig` \
+		`pkg-config --libs freetype2`
+
+# NetBSD
+# LIBS = -Wl,-R${X11LIB} -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender \
+#		`pkg-config --libs fontconfig` \
+#		`pkg-config --libs freetype2`
+
+STCFLAGS = $(INCS) $(CPPFLAGS) $(CFLAGS)
 STLDFLAGS = $(LIBS) $(LDFLAGS)
 
-# OpenBSD:
-# CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
-LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft \
-		`$(PKG_CONFIG) --libs fontconfig` \
-		`$(PKG_CONFIG) --libs freetype2`
-
-# compiler and linker
 CC = cc
