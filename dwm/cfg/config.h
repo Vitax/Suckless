@@ -3,16 +3,21 @@
 #include <dwm.h>
 
 /* appearance */
-static const unsigned int gappx = 0;    /* gaps between windows */
-static const unsigned int borderpx = 4; /* border pixel of windows */
+/* gaps between windows */
+static const unsigned int gappx = 0;
+/* border pixel of windows */
+static const unsigned int borderpx = 4;
 
 static const int vertpadbar = 2;
 static const int horizpadbar = 4;
 
-static const int barheight = 26; /* user defined bar height */
+/* user defined bar height */
+static const int barheight = 26;
 
-static const int showbar = 1; /* 0 means no bar */
-static const int topbar = 1;  /* 0 means bottom bar */
+/* 0 means no bar */
+static const int showbar = 1;
+/* 0 means bottom bar */
+static const int topbar = 0;
 
 static const char *fonts[] = {
     "FantasqueSansMono Nerd Font:pixelsize=18:antialias=true:autohint=full",
@@ -28,13 +33,13 @@ const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "144x41", "-e",
                         "tmux", "new", "-A",     "-s", "spterm", NULL};
 const char *spcmd2[] = {"st",     "-n", "spfm",   "-g",
                         "120x34", "-e", "ranger", NULL};
-const char *spcmd3[] = {"keepassxc", NULL};
+const char *spcmd3[] = {"keepass.sh", NULL};
 
 static Sp scratchpads[] = {
     /* name, cmd  */
     {"spterm", spcmd1},
     {"spranger", spcmd2},
-    {"KeePassXC", spcmd3},
+    {"KeePass", spcmd3},
 };
 
 /* tagging */
@@ -59,15 +64,18 @@ static const Rule rules[] = {
     {"htop", NULL, NULL, 0, 1, 1, -1},
     {NULL, "spterm", NULL, SPTAG(0), 1, 1, -1},
     {NULL, "spfm", NULL, SPTAG(1), 1, 1, -1},
-    {"KeePassXC", NULL, NULL, SPTAG(2), 1, 1, -1},
+    {"KeePass", NULL, NULL, SPTAG(2), 1, 1, -1},
 };
 
 /* layout(s) */
-static const float mfact = 0.50; /* factor of master area size [0.05..0.95] */
+static const int nmaster = 1;
+/* 1 means respect size hints in tiled resizals */
+static const int resizehints = 1;
+/* 1 will force focus on the fullscreen window */
+static const int lockfullscreen = 1;
 
-static const int nmaster = 1; /* number of clients in master area */
-static const int resizehints =
-    1; /* 1 means respect size hints in tiled resizals */
+/* factor of master area size [0.05..0.95] */
+static const float mfact = 0.50;
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
@@ -81,13 +89,13 @@ static const Layout layouts[] = {
 #define AltMask Mod1Mask
 #define SuperMask Mod4Mask
 
-#define TAGKEYS(KEY, TAG)                                                   \
-    {AltMask, KEY, view, {.ui = 1 << TAG}},                                 \
+#define TAGKEYS(KEY, TAG) \
+    {AltMask, KEY, view, {.ui = 1 << TAG}}, \
     {AltMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
 
 static Key keys[] = {
     /* modifier, key, function, argument */
-    {SuperMask | ControlMask, XK_b, togglebar, {0}},
+    {AltMask | ControlMask, XK_b, togglebar, {0}},
 
     {AltMask, XK_j, focusstackvis, {.i = +1}},
     {AltMask, XK_k, focusstackvis, {.i = -1}},
@@ -96,7 +104,7 @@ static Key keys[] = {
     {AltMask | ShiftMask, XK_k, focusstackhid, {.i = -1}},
 
     {AltMask, XK_s, show, {0}},
-    {AltMask | ControlMask, XK_m, hide, {0}},
+    {AltMask | ShiftMask, XK_n, hide, {0}},
 
     {AltMask, XK_h, rotatestack, {.i = -1}},
     {AltMask, XK_l, rotatestack, {.i = +1}},
@@ -104,8 +112,8 @@ static Key keys[] = {
     {AltMask, XK_i, incnmaster, {.i = +1}},
     {AltMask, XK_d, incnmaster, {.i = -1}},
 
-    {AltMask | ShiftMask, XK_h, setmfact, {.f = -0.005}},
-    {AltMask | ShiftMask, XK_l, setmfact, {.f = +0.005}},
+    {AltMask | ShiftMask, XK_h, setmfact, {.f = -0.0125}},
+    {AltMask | ShiftMask, XK_l, setmfact, {.f = +0.0125}},
 
     {AltMask, XK_Tab, view, {0}},
 
@@ -131,13 +139,13 @@ static Key keys[] = {
     {AltMask | ShiftMask, XK_comma, tagmon, {.i = -1}},
     {AltMask | ShiftMask, XK_period, tagmon, {.i = +1}},
 
-    {AltMask | ControlMask, XK_g, setgaps, {.i = +4}},
-    {AltMask | ShiftMask, XK_g, setgaps, {.i = -4}},
+    {AltMask | ShiftMask, XK_g, setgaps, {.i = +4}},
+    {AltMask | ControlMask, XK_g, setgaps, {.i = -4}},
 
     {SuperMask | AltMask | ShiftMask, XK_q, quit, {0}},
 
-    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2)
-    TAGKEYS(XK_4, 3) TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
+    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
+        TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
     /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
 };
 

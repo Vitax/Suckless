@@ -1,13 +1,3 @@
-/*
- * origin: http://github.com/mitchweaver/suckless
- * dwm-statuspadding patch, but with barpadding patch support
- * 
- * modified: http://github.com/vitax/suckless
- * added bar height patch support
- * --------- NOTE: ADD TO YOUR CONFIG.H: ---------
- * +static const int horizpadbar = 2; // horizontal padding for statusbar
- * +static const int vertpadbar  = 0; // vertical padding for statusbar
- */
 --- dwm/dwm.c
 +++ dwm/dwm.c
 @@ -704,8 +704,8 @@ drawbar(Monitor *m)
@@ -19,7 +9,7 @@
 +		tw = TEXTW(stext);
 +		drw_text(drw, m->ww - tw, 0, sw, bh, lrpad / 2, stext, 0);
  	}
- 
+
  	for (c = m->clients; c; c = c->next) {
 @@ -1674,8 +1674,8 @@ setup(void)
  	drw = drw_create(dpy, screen, root, sw, sh);
@@ -32,6 +22,6 @@
  	updategeom();
  	/* init atoms */
  	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
--- 
+--
 2.7.4
 

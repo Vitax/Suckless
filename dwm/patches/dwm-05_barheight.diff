@@ -1,5 +1,3 @@
-diff --git a/dwm.c b/dwm.c
-index 4465af1..2c27cb3 100644
 --- a/dwm.c
 +++ b/dwm.c
 @@ -1545,7 +1545,7 @@ setup(void)
