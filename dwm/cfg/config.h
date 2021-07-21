@@ -4,7 +4,7 @@
 
 /* appearance */
 /* gaps between windows */
-static const unsigned int gappx = 0;
+static const unsigned int gappx = 30;
 /* border pixel of windows */
 static const unsigned int borderpx = 4;
 
@@ -120,18 +120,18 @@ static Key keys[] = {
     {AltMask | ShiftMask, XK_c, killclient, {0}},
     {AltMask, XK_F4, killclient, {0}},
 
-    {AltMask, XK_t, setlayout, {.v = &layouts[0]}},
-    {AltMask, XK_f, setlayout, {.v = &layouts[1]}},
-    {AltMask, XK_m, setlayout, {.v = &layouts[2]}},
-    {AltMask, XK_u, setlayout, {.v = &layouts[3]}},
+    {AltMask | ShiftMask, XK_t, setlayout, {.v = &layouts[0]}},
+    {AltMask | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
+    {AltMask | ShiftMask, XK_m, setlayout, {.v = &layouts[2]}},
+    {AltMask | ShiftMask, XK_r, setlayout, {.v = &layouts[3]}},
 
     {AltMask | ShiftMask, XK_y, togglescratch, {.ui = 0}},
     {AltMask | ShiftMask, XK_u, togglescratch, {.ui = 1}},
     {AltMask | ShiftMask, XK_x, togglescratch, {.ui = 2}},
 
-    {AltMask | ShiftMask, XK_m, togglefullscr, {0}},
-    {AltMask | ShiftMask, XK_s, togglesticky, {0}},
-    {AltMask | ShiftMask, XK_space, togglefloating, {0}},
+    {AltMask | ControlMask, XK_m, togglefullscr, {0}},
+    {AltMask | ControlMask, XK_s, togglesticky, {0}},
+    {AltMask | ControlMask, XK_space, togglefloating, {0}},
 
     {AltMask, XK_comma, focusmon, {.i = -1}},
     {AltMask, XK_period, focusmon, {.i = +1}},

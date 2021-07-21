@@ -1,27 +1,7 @@
-From 7b7773458c072e4b24d6ea32d0364a8e402e4a43 Mon Sep 17 00:00:00 2001
-From: swy7ch <swy7ch@protonmail.com>
-Date: Fri, 8 May 2020 19:07:24 +0200
-Subject: [PATCH] [PATCH] update dwm-fullgaps patch to be used with tile layout
- update
-
-the recent tile layout changes in commit HEAD~1 (f09418b) broke the
-patch
-
-this patch adapt the new `if` statements to take gaps into account
-
-this patch also provides manpage entries for the keybindings
----
- config.def.h |  4 ++++
- dwm.1        | 10 ++++++++++
- dwm.c        | 33 +++++++++++++++++++++++----------
- 3 files changed, 37 insertions(+), 10 deletions(-)
-
-diff --git a/config.def.h b/config.def.h
-index 1c0b587..38d2f6c 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -2,6 +2,7 @@
- 
+
  /* appearance */
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
 +static const unsigned int gappx     = 5;        /* gaps between windows */
@@ -90,7 +70,7 @@ index 9fd0286..45a58f3 100644
 @@ -1498,6 +1501,16 @@ setfullscreen(Client *c, int fullscreen)
  	}
  }
- 
+
 +void
 +setgaps(const Arg *arg)
 +{
@@ -132,7 +112,4 @@ index 9fd0286..45a58f3 100644
 +				ty += HEIGHT(c) + m->gappx;
  		}
  }
- 
--- 
-2.26.2
 
