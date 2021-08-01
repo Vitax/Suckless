@@ -9,10 +9,10 @@ static const char *user  = "nobody";
 static const char *group = "nogroup";
 
 static const char *colorname[NUMCOLS] = {
-	[BACKGROUND] =   "black",  /* after initialization */
-	[INIT] =   "#2d2d2d",      /* after initialization */
-	[INPUT] =  "#005577",      /* during input */
-	[FAILED] = "#CC3333",      /* wrong password */
+	[BACKGROUND] =   "#2D2D2C",  /* after initialization */
+	[INIT] =   "#EDEDED",      /* after initialization */
+	[INPUT] =  "#4271AE",      /* during input */
+	[FAILED] = "#D7005F",      /* wrong password */
 };
 
 /* treat a cleared input like a wrong password (color) */
@@ -35,5 +35,4 @@ static XRectangle rectangles[9] = {
 	{ 8,	3,	4,	1 },
 	{ 9,	4,	1,	2 },
 	{ 11,	4,	1,	2 },
-
 };

@@ -1,9 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 static char *fontfallbacks[] = {
+    "Inconsolata",
+    "Comfortaa",
 	"dejavu sans mono",
-	"roboto",
-	"ubuntu",
 };
 #define NUMFONTSCALES 42
 #define FONTSZ(x) ((int)(10.0 * powf(1.1288, (x)))) /* x in [0, NUMFONTSCALES-1] */
