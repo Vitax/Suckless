@@ -14,13 +14,13 @@
 +#if defined(__OpenBSD__)
 + #include <sys/sysctl.h>
 +#endif
- 
+
  /* Arbitrary sizes */
  #define UTF_INVALID   0xFFFD
-@@ -232,6 +235,22 @@ static uchar utfmask[UTF_SIZ + 1] = {0xC0, 0x80, 0xE0, 0xF0, 0xF8};
+@@ -232,6 +235,24 @@ static uchar utfmask[UTF_SIZ + 1] = {0xC0, 0x80, 0xE0, 0xF0, 0xF8};
  static Rune utfmin[UTF_SIZ + 1] = {       0,    0,  0x80,  0x800,  0x10000};
  static Rune utfmax[UTF_SIZ + 1] = {0x10FFFF, 0x7F, 0x7FF, 0xFFFF, 0x10FFFF};
- 
+
 +int
 +subprocwd(char *path)
 +{
@@ -34,6 +34,8 @@
 +	if (sysctl(name, 3, path, &sz, 0, 0) == -1)
 +		return -1;
 +	return 0;
++#else
++   return -1;
 +#endif
 +}
 +
@@ -54,7 +56,7 @@
 @@ -110,6 +110,8 @@ void *xmalloc(size_t);
  void *xrealloc(void *, size_t);
  char *xstrdup(char *);
- 
+
 +int subprocwd(char *);
 +
  /* config.h globals */
@@ -73,7 +75,7 @@
 @@ -635,6 +636,29 @@ xsetsel(char *str)
  	setsel(str, CurrentTime);
  }
- 
+
 +void
 +plumb(char *sel) {
 +	if (sel == NULL)
@@ -107,5 +109,5 @@
 +	else if (e->xbutton.button == Button3)
 +		plumb(xsel.primary);
  }
- 
+
  void

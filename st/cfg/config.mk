@@ -15,27 +15,24 @@ MANPREFIX = $(PREFIX)/share/man
 X11INC = /usr/local/include
 X11LIB = /usr/local/lib
 
-INCS = -I$(X11INC) \
-       `pkg-config --cflags fontconfig` \
-       `pkg-config --cflags freetype2` \
-	   -I${XDG_CACHE_HOME}/themes
+INCS = -I$(X11INC) `pkg-config --cflags fontconfig` `pkg-config --cflags freetype2` -I${XDG_CACHE_HOME}/themes
 
 # Linux
-# CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
+CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600
 # OpenBSD
-CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
+# CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE
 # NetBSD
 # CPPFLAGS = -DVERSION=\"$(VERSION)\" -D_XOPEN_SOURCE=600 -D_BSD_SOURCE -D_NETBSD_SOURCE
 
 # Linux
-# LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender \
-# 	   `pkg-config --libs fontconfig` \
-# 	   `pkg-config --libs freetype2`
+LIBS = -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender \
+	   `pkg-config --libs fontconfig` \
+	   `pkg-config --libs freetype2`
 
 # OpenBSD
-LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft -lXrender \
-		`pkg-config --libs fontconfig` \
-		`pkg-config --libs freetype2`
+# LIBS = -L$(X11LIB) -lm -lX11 -lutil -lXft -lXrender \
+# 		`pkg-config --libs fontconfig` \
+# 		`pkg-config --libs freetype2`
 
 # NetBSD
 # LIBS = -Wl,-R${X11LIB} -L$(X11LIB) -lm -lrt -lX11 -lutil -lXft -lXrender \
