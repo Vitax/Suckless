@@ -1,0 +1,23 @@
+Author: https://github.com/vitax
+Modified version of the centeredwindowname patch.
+This one will support the statuspadding patch and use the center of the section
+width,instead of the whole bar width
+--- a/dwm.c
++++ b/dwm.c
+@@ -731,8 +731,12 @@ drawbar(Monitor *m)
+
+ 	if ((w = m->ww - tw - x) > bh) {
+ 		if (m->sel) {
++            /* fix overflow when window name is bigger than window width */
++			int mid = (w - 2 * sp - (int)TEXTW(m->sel->name)) / 2;
++			/* make sure name will not overlap on tags even when it is very long */
++			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
+ 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
+-			drw_text(drw, x, 0, w - 2 * sp, bh, lrpad / 2, m->sel->name, 0);
++			drw_text(drw, x, 0, w - 2 * sp, bh, mid, m->sel->name, 0);
+ 			if (m->sel->isfloating)
+ 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+ 		} else {
+--
+2.27.0
+

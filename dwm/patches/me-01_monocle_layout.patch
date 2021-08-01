@@ -1,6 +1,12 @@
 // http://github.com/vitax/suckless
 --- dwm/dwm.c
 +++ dwm/dwm.c
+@@ -1183,2 +1183,2 @@
+ 	if (n > 0) /* override layout symbol */
+- 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
++ 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "| [%d]", n);
+--- dwm/dwm.c
++++ dwm/dwm.c
 @@ -1186,1 +1186,1 @@
 - resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
 + resize(c, m->wx + m->gappx , m->wy + m->gappx, m->ww - (2 * c->bw) - (2 * m->gappx), m->wh - (2 * c->bw) - (2 * m->gappx), 0);

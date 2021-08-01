@@ -4,15 +4,18 @@
 
 /* appearance */
 /* gaps between windows */
-static const unsigned int gappx = 30;
+static const unsigned int gappx = 24;
 /* border pixel of windows */
-static const unsigned int borderpx = 4;
+static const unsigned int borderpx = 0;
 
-static const int vertpadbar = 2;
-static const int horizpadbar = 4;
+static const int vertpad = 12; /* vertical padding of bar */
+static const int horizpad = gappx; /* horizontal padding of bar */
+
+static const int verttxtpad = 8;
+static const int horiztxtpad = 4;
 
 /* user defined bar height */
-static const int barheight = 26;
+static const int barheight = 28;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -20,19 +23,19 @@ static const int showbar = 1;
 static const int topbar = 0;
 
 static const char *fonts[] = {
-    "FantasqueSansMono Nerd Font:pixelsize=18:antialias=true:autohint=full",
-    "Feather:pixelsize=18:antialias=true:autohint=full",
+    "PT Mono:pixelsize=16:antialias=true:autohint=light",
+    "Iosevka:pixelsize=18:antialias=true:autohint=light",
 };
 
 typedef struct {
-  const char *name;
-  const void *cmd;
+    const char *name;
+    const void *cmd;
 } Sp;
 
 const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "144x41", "-e",
-                        "tmux", "new", "-A",     "-s", "spterm", NULL};
+    "tmux", "new", "-A",     "-s", "spterm", NULL};
 const char *spcmd2[] = {"st",     "-n", "spfm",   "-g",
-                        "120x34", "-e", "ranger", NULL};
+    "120x34", "-e", "ranger", NULL};
 const char *spcmd3[] = {"keepass.sh", NULL};
 
 static Sp scratchpads[] = {
@@ -79,10 +82,10 @@ static const float mfact = 0.50;
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    {"[T]", tile},
-    {"><>", NULL},
-    {"[M]", monocle},
-    {"TTT", bstack},
+    {"| [T]", tile},
+    {"| ><>", NULL},
+    {"| [M]", monocle},
+    {"| TTT", bstack},
 };
 
 /* key definitions */
@@ -90,63 +93,57 @@ static const Layout layouts[] = {
 #define SuperMask Mod4Mask
 
 #define TAGKEYS(KEY, TAG) \
-    {AltMask, KEY, view, {.ui = 1 << TAG}}, \
-    {AltMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
+{SuperMask, KEY, view, {.ui = 1 << TAG}}, \
+{SuperMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
 
 static Key keys[] = {
     /* modifier, key, function, argument */
-    {AltMask | ControlMask, XK_b, togglebar, {0}},
+    {SuperMask | ControlMask, XK_b, togglebar, {0}},
 
-    {AltMask, XK_j, focusstackvis, {.i = +1}},
-    {AltMask, XK_k, focusstackvis, {.i = -1}},
+    {SuperMask, XK_j, focusstack, {.i = +1}},
+    {SuperMask, XK_k, focusstack, {.i = -1}},
 
-    {AltMask | ShiftMask, XK_j, focusstackhid, {.i = +1}},
-    {AltMask | ShiftMask, XK_k, focusstackhid, {.i = -1}},
+    {SuperMask, XK_h, rotatestack, {.i = -1}},
+    {SuperMask, XK_l, rotatestack, {.i = +1}},
 
-    {AltMask, XK_s, show, {0}},
-    {AltMask | ShiftMask, XK_n, hide, {0}},
+    {SuperMask, XK_i, incnmaster, {.i = +1}},
+    {SuperMask, XK_d, incnmaster, {.i = -1}},
 
-    {AltMask, XK_h, rotatestack, {.i = -1}},
-    {AltMask, XK_l, rotatestack, {.i = +1}},
-
-    {AltMask, XK_i, incnmaster, {.i = +1}},
-    {AltMask, XK_d, incnmaster, {.i = -1}},
-
-    {AltMask | ShiftMask, XK_h, setmfact, {.f = -0.0125}},
-    {AltMask | ShiftMask, XK_l, setmfact, {.f = +0.0125}},
+    {SuperMask | ShiftMask, XK_h, setmfact, {.f = -0.0125}},
+    {SuperMask | ShiftMask, XK_l, setmfact, {.f = +0.0125}},
 
     {AltMask, XK_Tab, view, {0}},
 
-    {AltMask | ShiftMask, XK_c, killclient, {0}},
-    {AltMask, XK_F4, killclient, {0}},
+    {SuperMask | ShiftMask, XK_c, killclient, {0}},
+    {SuperMask, XK_F4, killclient, {0}},
 
-    {AltMask | ShiftMask, XK_t, setlayout, {.v = &layouts[0]}},
-    {AltMask | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
-    {AltMask | ShiftMask, XK_m, setlayout, {.v = &layouts[2]}},
-    {AltMask | ShiftMask, XK_r, setlayout, {.v = &layouts[3]}},
+    {SuperMask | ShiftMask, XK_t, setlayout, {.v = &layouts[0]}},
+    {SuperMask | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
+    {SuperMask | ShiftMask, XK_m, setlayout, {.v = &layouts[2]}},
+    {SuperMask | ShiftMask, XK_r, setlayout, {.v = &layouts[3]}},
 
-    {AltMask | ShiftMask, XK_y, togglescratch, {.ui = 0}},
-    {AltMask | ShiftMask, XK_u, togglescratch, {.ui = 1}},
-    {AltMask | ShiftMask, XK_x, togglescratch, {.ui = 2}},
+    {SuperMask | ShiftMask, XK_y, togglescratch, {.ui = 0}},
+    {SuperMask | ShiftMask, XK_u, togglescratch, {.ui = 1}},
+    {SuperMask | ShiftMask, XK_x, togglescratch, {.ui = 2}},
 
-    {AltMask | ControlMask, XK_m, togglefullscr, {0}},
-    {AltMask | ControlMask, XK_s, togglesticky, {0}},
-    {AltMask | ControlMask, XK_space, togglefloating, {0}},
+    {SuperMask | ControlMask, XK_m, togglefullscr, {0}},
+    {SuperMask | ControlMask, XK_s, togglesticky, {0}},
+    {SuperMask | ControlMask, XK_space, togglefloating, {0}},
 
-    {AltMask, XK_comma, focusmon, {.i = -1}},
-    {AltMask, XK_period, focusmon, {.i = +1}},
+    {SuperMask, XK_comma, focusmon, {.i = -1}},
+    {SuperMask, XK_period, focusmon, {.i = +1}},
 
-    {AltMask | ShiftMask, XK_comma, tagmon, {.i = -1}},
-    {AltMask | ShiftMask, XK_period, tagmon, {.i = +1}},
+    {SuperMask | ShiftMask, XK_comma, tagmon, {.i = -1}},
+    {SuperMask | ShiftMask, XK_period, tagmon, {.i = +1}},
 
-    {AltMask | ShiftMask, XK_g, setgaps, {.i = +4}},
-    {AltMask | ControlMask, XK_g, setgaps, {.i = -4}},
+    {SuperMask | ShiftMask, XK_g, setgaps, {.i = +4}},
+    {SuperMask | ControlMask, XK_g, setgaps, {.i = -4}},
 
     {SuperMask | AltMask | ShiftMask, XK_q, quit, {0}},
 
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
-    /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
+        /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
 };
 
 /* button definitions */
@@ -156,12 +153,11 @@ static Button buttons[] = {
     /* click, event mask, button, function argument */
     {ClkLtSymbol, 0, Button1, setlayout, {0}},
     {ClkLtSymbol, 0, Button3, setlayout, {.v = &layouts[2]}},
-    {ClkClientWin, AltMask, Button1, movemouse, {0}},
-    {ClkClientWin, AltMask, Button2, togglefloating, {0}},
-    {ClkClientWin, AltMask, Button3, resizemouse, {0}},
-    {ClkWinTitle, 0, Button1, togglewin, {0}},
+    {ClkClientWin, SuperMask, Button1, movemouse, {0}},
+    {ClkClientWin, SuperMask, Button2, togglefloating, {0}},
+    {ClkClientWin, SuperMask, Button3, resizemouse, {0}},
     {ClkTagBar, 0, Button1, view, {0}},
     {ClkTagBar, 0, Button3, toggleview, {0}},
-    {ClkTagBar, AltMask, Button1, tag, {0}},
-    {ClkTagBar, AltMask, Button3, toggletag, {0}},
+    {ClkTagBar, SuperMask, Button1, tag, {0}},
+    {ClkTagBar, SuperMask, Button3, toggletag, {0}},
 };
