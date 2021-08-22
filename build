@@ -57,7 +57,6 @@ for name ; do
 
     cp -f ../cfg/config.h . 2>/dev/null ||:
     cp -f ../cfg/config.mk . 2>/dev/null ||:
-    cp -f ../cfg/Makefile . 2>/dev/null ||:
     case $name in
         slock)
             >&2 printf '\n%s\n' 'Need to install to /usr/local due to suid:'

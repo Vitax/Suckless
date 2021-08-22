@@ -12,8 +12,8 @@ MANPREFIX = $(PREFIX)/share/man
 # X11LIB = /usr/X11R7/lib
 
 # FreeBSD
-X11INC = /usr/local/include
-X11LIB = /usr/local/lib
+# X11INC = /usr/local/include
+# X11LIB = /usr/local/lib
 
 INCS = -I$(X11INC) `pkg-config --cflags fontconfig` `pkg-config --cflags freetype2` -I${XDG_CACHE_HOME}/themes
 

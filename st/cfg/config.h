@@ -6,7 +6,7 @@
  * appearance
  */
 
-static char font[] = "PT Mono:pixelsize=16:antialias=true:autohint=hintslight";
+static char font[] = "Iosevka Nerd Font:pixelsize=16:antialias=true";
 
 // plumber patch
 static char *plumb_cmd = "opn";
@@ -144,7 +144,7 @@ static unsigned int defaultattr = 11;
 
 /*
  * Force mouse select/shortcuts while mask is active (when MODE_MOUSE is set).
- * Note that if you want to use ShiftMask with selmasks, set this to an other
+ * Note that if you want to use shiftMask with selmasks, set this to an other
  * modifier, set to 0 to not use it.
  */
 static uint forcemousemod = shiftMask;
@@ -265,10 +265,11 @@ static Key key[] = {
     {XK_KP_Insert, ctrlMask, "\033[2;5~", +1, 0},
     {XK_KP_Insert, XK_ANY_MOD, "\033[4h", -1, 0},
     {XK_KP_Insert, XK_ANY_MOD, "\033[2~", +1, 0},
+    {XK_KP_Delete, ctrlMask, "\033[M", -1, 0},
     {XK_KP_Delete, ctrlMask, "\033[3;5~", +1, 0},
     {XK_KP_Delete, shiftMask, "\033[2K", -1, 0},
     {XK_KP_Delete, shiftMask, "\033[3;2~", +1, 0},
-    {XK_KP_Delete, XK_ANY_MOD, "\033[3~", -1, 0},
+    {XK_KP_Delete, XK_ANY_MOD, "\033[P", -1, 0},
     {XK_KP_Delete, XK_ANY_MOD, "\033[3~", +1, 0},
     {XK_KP_Multiply, XK_ANY_MOD, "\033Oj", +2, 0},
     {XK_KP_Add, XK_ANY_MOD, "\033Ok", +2, 0},
@@ -332,10 +333,11 @@ static Key key[] = {
     {XK_Insert, ctrlMask, "\033[2;5~", +1, 0},
     {XK_Insert, XK_ANY_MOD, "\033[4h", -1, 0},
     {XK_Insert, XK_ANY_MOD, "\033[2~", +1, 0},
+    {XK_Delete, ctrlMask, "\033[M", -1, 0},
     {XK_Delete, ctrlMask, "\033[3;5~", +1, 0},
     {XK_Delete, shiftMask, "\033[2K", -1, 0},
     {XK_Delete, shiftMask, "\033[3;2~", +1, 0},
-    {XK_Delete, XK_ANY_MOD, "\033[3~", -1, 0},
+    {XK_Delete, XK_ANY_MOD, "\033[P", -1, 0},
     {XK_Delete, XK_ANY_MOD, "\033[3~", +1, 0},
     {XK_BackSpace, XK_NO_MOD, "\177", 0, 0},
     {XK_BackSpace, altMask, "\033\177", 0, 0},

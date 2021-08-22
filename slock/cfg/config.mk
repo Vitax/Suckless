@@ -5,12 +5,12 @@ PREFIX = /usr/local
 MANPREFIX = ${PREFIX}/share/man
 
 # OpenBSD
-# X11INC = /usr/X11R6/include
-# X11LIB = /usr/X11R6/lib
+X11INC = /usr/X11R6/include
+X11LIB = /usr/X11R6/lib
 
 # FreeBSD
-X11INC = /usr/local/include
-X11LIB = /usr/local/lib
+# X11INC = /usr/local/include
+# X11LIB = /usr/local/lib
 
 XINERAMALIBS  = -lXinerama
 XINERAMAFLAGS = -DXINERAMA
@@ -20,10 +20,10 @@ FREETYPELIBS = -lXft
 # FREETYPEINC = /usr/X11R6/include/freetype2
 
 # FreeBSD
-FREETYPEINC = /usr/local/include/freetype2
+# FREETYPEINC = /usr/local/include/freetype2
 
 # Linux
-# FREETYPEINC = /usr/include/freetype2
+FREETYPEINC = /usr/include/freetype2
 
 INCS = -I. -I/usr/include -I${X11INC} -I${FREETYPEINC}
 
@@ -36,9 +36,9 @@ LDFLAGS = -s ${LIBS}
 LIBS = -L/usr/lib -lc -lcrypt -L${X11LIB} -lX11 -lXext -lXrandr ${XINERAMALIBS} ${FREETYPELIBS}
 
 # Linux
-# CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE -DHAVE_SHADOW_H ${XINERAMAFLAGS}
+CPPFLAGS = -DVERSION=\"${VERSION}\" -D_DEFAULT_SOURCE -DHAVE_SHADOW_H ${XINERAMAFLAGS}
 # OpenBSD / FreeBSD
-CPPFLAGS = -DVERSION=\"${VERSION}\" -D_BSD_SOURCE ${XINERAMAFLAGS} -DHAVE_BSD_AUTH
+# CPPFLAGS = -DVERSION=\"${VERSION}\" -D_BSD_SOURCE ${XINERAMAFLAGS} -DHAVE_BSD_AUTH
 # NetBSD
 # CPPFLAGS = -DVERSION=\"${VERSION}\" -D_BSD_SOURCE -D_NETBSD_SOURCE ${XINERAMAFLAGS}
 

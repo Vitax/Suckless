@@ -3,7 +3,7 @@
 /* appearance */
 #include <tabbed.h>
 
-static char font[] = "PT Mono:pixelsize=16:antialias=true:autohint=hintslight";
+static char font[] = "Iosevka Nerd Font:pixelsize=16:antialias=true";
 
 static const int barHeight = 24;
 

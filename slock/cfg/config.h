@@ -1,5 +1,5 @@
 /* time in seconds to cancel lock with mouse movement */
-static const int timetocancel = 3;
+static const int timetocancel = 0;
 
 /* allow control key to trigger fail on clear */
 static const int controlkeyclear = 0;

@@ -16,14 +16,14 @@ X11INC = /usr/local/include
 X11LIB = /usr/local/lib
 
 # Linux includes and libs
-#LIBS = -L/usr/lib -lc -lm -L${X11LIB} -lXft -lfontconfig -lX11
-#INCS = -I. -I/usr/include -I/usr/include/freetype2 -I${X11INC}
+LIBS = -L/usr/lib -lc -lm -L${X11LIB} -lXft -lfontconfig -lX11
+INCS = -I. -I/usr/include -I/usr/include/freetype2 -I${X11INC}
 
 # BSD (uncomment)
-INCS = -I. -I${X11INC} -I${X11INC}/freetype2
+# INCS = -I. -I${X11INC} -I${X11INC}/freetype2
 
 # FreeBSD (uncomment)
-LIBS = -L/usr/local/lib -lc -lm -L${X11LIB} -lXft -lfontconfig -lX11
+# LIBS = -L/usr/local/lib -lc -lm -L${X11LIB} -lXft -lfontconfig -lX11
 
 # flags
 CPPFLAGS = -DVERSION=\"${VERSION}\" -D_XOPEN_SOURCE=600

@@ -12,7 +12,7 @@ static const unsigned int border_width = 2;
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] =
 {
-    "PT Mono:pixelsize=18:antialias=true"
+    "Iosevka Nerd Font:pixelsize=20:antialias=true"
 };
 
 /* -p  option; prompt to the left of input field */
