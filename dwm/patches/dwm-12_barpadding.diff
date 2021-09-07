@@ -88,8 +88,8 @@
 -		m->wh -= bh;
 -		m->by = m->topbar ? m->wy : m->wy + m->wh;
 -		m->wy = m->topbar ? m->wy + bh : m->wy;
-+		m->wh = m->wh - vertpad - bh;
-+		m->by = m->topbar ? m->wy : m->wy + m->wh + vertpad;
++		m->wh = m->wh - vp - bh;
++		m->by = m->topbar ? m->wy : m->wy + m->wh + vp;
 +		m->wy = m->topbar ? m->wy + bh + vp : m->wy;
  	} else
 -		m->by = -bh;

@@ -6,7 +6,7 @@
  * appearance
  */
 
-static char font[] = "Iosevka Nerd Font:pixelsize=16:antialias=true";
+static char font[] = "Iosevka Nerd Font:pixelsize=18:antialias=true";
 
 // plumber patch
 static char *plumb_cmd = "opn";

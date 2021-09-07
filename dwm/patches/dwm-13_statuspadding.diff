@@ -18,10 +18,8 @@
 -	lrpad = drw->fonts->h;
 -	bh = barheight ? barheight : drw->fonts->h + 2;
 +	lrpad = drw->fonts->h + horiztxtpad;
-+	bh = barheight ? barheight : drw->fonts->h + verttxtpad;
++	bh = barheight ? barheight + verttxtpad : drw->fonts->h + verttxtpad;
  	updategeom();
  	/* init atoms */
  	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
---
-2.7.4
 

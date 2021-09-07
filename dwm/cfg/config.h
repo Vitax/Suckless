@@ -2,48 +2,64 @@
 
 #include <dwm.h>
 
-/* appearance */
-
-static const unsigned int ulinepad = 12; /* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke = 3; /* thickness / height of the underline */
-static const unsigned int ulinevoffset = 1; /* how far above the bottom of the bar the line should appear */
-static const int ulineall = 0; /* 1 to show underline on all tags, 0 for just the active ones */
+/*
+ * appearance
+ */
 
 /* gaps between windows */
-static const unsigned int gappx = 32;
+static const unsigned int gappx = 28;
 /* border pixel of windows */
 static const unsigned int borderpx = 0;
 
-/* static const int vertpad = gappx / 2; /1* vertical padding of bar *1/ */
-/* static const int horizpad = gappx; /1* horizontal padding of bar *1/ */
+/* vertical padding of bar */
+static const int vertpad = 0;
+/* horizontal padding of bar */
+static const int horizpad = 0;
 
-static const int vertpad = 0; /* vertical padding of bar */
-static const int horizpad = 0; /* horizontal padding of bar */
-
-static const int verttxtpad = 2; /* vertical padding on text */
-static const int horiztxtpad = 4; /* horizontal padding on text */
+/* vertical padding on text */
+static const int verttxtpad = 2;
+/* horizontal padding on text */
+static const int horiztxtpad = 4;
 
 /* user defined bar height */
-static const int barheight = 24;
+static const int barheight = 22;
 
 /* 0 means no bar */
 static const int showbar = 1;
 /* 0 means bottom bar */
-static const int topbar = 0;
+static const int topbar = 1;
+
+/* 1 means respect decoration hints */
+static const int decorhints = 1;
+
+/* Possible tab bar modes */
+enum showtab_modes {
+  showtab_never,
+  showtab_auto,
+  showtab_nmodes,
+  showtab_always
+};
+
+/* User defined tab bar height */
+static const int tabheight = 16;
+/* Default tab bar show mode */
+static const int showtab = showtab_auto;
+/* 0 means bottom tab bar */
+static const int toptab = 1;
 
 static const char *fonts[] = {
     "Iosevka Nerd Font:pixelsize=16:antialias=true",
 };
 
 typedef struct {
-    const char *name;
-    const void *cmd;
+  const char *name;
+  const void *cmd;
 } Sp;
 
 const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "144x41", "-e",
-    "tmux", "new", "-A",     "-s", "spterm", NULL};
+                        "tmux", "new", "-A",     "-s", "spterm", NULL};
 const char *spcmd2[] = {"st",     "-n", "spfm",   "-g",
-    "120x34", "-e", "ranger", NULL};
+                        "120x34", "-e", "ranger", NULL};
 const char *spcmd3[] = {"keepass2", NULL};
 
 static Sp scratchpads[] = {
@@ -63,7 +79,6 @@ static const Rule rules[] = {
      */
 
     /* class/instance, title, tags, mask, iscentered, isfloating, monitor */
-    {"FileSearch", NULL, NULL, 0, 1, 1, -1},
     {"feh", NULL, NULL, 0, 1, 1, -1},
     {"pcmanfm", NULL, NULL, 0, 1, 1, -1},
     {"Pcmanfm", NULL, NULL, 0, 1, 1, -1},
@@ -90,19 +105,19 @@ static const float mfact = 0.50;
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "| ﬿ ", tile },
-    { "|  ", NULL },
-    {"| ﬕ ", monocle},
-    {"| TTT", bstack},
+    {"﬿ ", tile},
+    {" ", NULL},
+    {" ", monocle},
+    {" ", bstack},
 };
 
 /* key definitions */
 #define AltMask Mod1Mask
 #define SuperMask Mod4Mask
 
-#define TAGKEYS(KEY, TAG) \
-{AltMask, KEY, view, {.ui = 1 << TAG}}, \
-{AltMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
+#define TAGKEYS(KEY, TAG)                                                      \
+  {AltMask, KEY, view, {.ui = 1 << TAG}},                                      \
+      {AltMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
 
 static Key keys[] = {
     /* modifier, key, function, argument */
@@ -116,7 +131,7 @@ static Key keys[] = {
 
     {AltMask, XK_i, incnmaster, {.i = +1}},
     {AltMask, XK_d, incnmaster, {.i = -1}},
-
+    {AltMask, XK_w, tabmode, {-1}},
     {AltMask | ShiftMask, XK_h, setmfact, {.f = -0.0125}},
     {AltMask | ShiftMask, XK_l, setmfact, {.f = +0.0125}},
 
@@ -151,7 +166,7 @@ static Key keys[] = {
 
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
-        /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
+    /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
 };
 
 /* button definitions */
@@ -166,6 +181,7 @@ static Button buttons[] = {
     {ClkClientWin, AltMask, Button3, resizemouse, {0}},
     {ClkTagBar, 0, Button1, view, {0}},
     {ClkTagBar, 0, Button3, toggleview, {0}},
+    {ClkTabBar, 0, Button1, focuswin, {0}},
     {ClkTagBar, AltMask, Button1, tag, {0}},
     {ClkTagBar, AltMask, Button3, toggletag, {0}},
 };
