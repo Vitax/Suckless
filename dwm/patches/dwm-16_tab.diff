@@ -135,7 +135,7 @@ index 5e4d494..e3662ca 100644
 -{
 +arrangemon(Monitor *m) {
 +	updatebarpos(m);
-+	XMoveResizeWindow(dpy, m->tabwin, m->wx + gappx + borderpx, m->ty, m->ww - 2 * (gappx + borderpx), th);
++	XMoveResizeWindow(dpy, m->tabwin, m->wx + gappx, m->ty, m->ww - 2 * gappx, th);
  	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
  	if (m->lt[m->sellt]->arrange)
  		m->lt[m->sellt]->arrange(m);
@@ -283,12 +283,12 @@ index 5e4d494..e3662ca 100644
 +
 +	/* cleans interspace between window names and current viewed tag label */
 +	w = m->ww - view_info_w - x;
-+	drw_text(drw, x, 0, w, th, 0, "", 0);
++	drw_text(drw, x, 0, w, th, lrpad / 2, "", 0);
 +
 +	/* view info */
 +	x += w;
 +	w = view_info_w;
-+	drw_text(drw, x, 0, w, th, lrpad / 2, view_info, 0);
++	drw_text(drw, x, 0, w, th, lrpad / 2, "", 0);
 +
 +	drw_map(drw, m->tabwin, 0, 0, m->ww, th);
 +}
