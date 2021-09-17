@@ -4,7 +4,7 @@
  * appearance
  */
 
-static char font[] = "TerminessTTF Nerd Font Mono:pixelsize=18:antialias=true:autohint=true";
+static char font[] = "Source Code Pro:pixelsize=16:antialias=true:autohint=true";
 
 // plumber patch
 static char *plumb_cmd = "opn";

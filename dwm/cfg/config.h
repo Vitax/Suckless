@@ -6,14 +6,14 @@
  */
 
 /* gaps between windows */
-static const unsigned int gappx = 16;
+static const unsigned int gappx = 28;
 /* border pixel of windows */
-static const unsigned int borderpx = 3;
+static const unsigned int borderpx = 4;
 
 /* vertical padding of bar */
-static const int vertpad = gappx / 2;
+static const int vertpad = 0;
 /* horizontal padding of bar */
-static const int horizpad = 240;
+static const int horizpad = 0;
 
 /* vertical padding on text */
 static const int verttxtpad = 2;
@@ -47,6 +47,7 @@ static const int showtab = showtab_auto;
 static const int toptab = 1;
 
 static const char *fonts[] = {
+    "Source Code Pro:pixelsize=16:antialias=true:autohint=false",
     "TerminessTTF Nerd Font:pixelsize=16:antialias=true:autohint=false",
 };
 

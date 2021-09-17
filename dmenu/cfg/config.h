@@ -7,11 +7,12 @@
 static int topbar = 1;
 
 /* set border width of menu */
-static const unsigned int border_width = 2;
+static const unsigned int border_width = 5;
 
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] =
 {
+    "Source Code Pro:pixelsize=20:antialias=true",
     "TerminessTTF Nerd Font:pixelsize=20:antialias=true"
 };
 
@@ -19,11 +20,11 @@ static const char *fonts[] =
 static const char *prompt = "";
 
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
-static unsigned int lines = 0;
-static unsigned int lineheight = 3;
+static unsigned int lines = 12;
+static unsigned int lineheight = 32;
 
 /*
  * Characters not considered part of a word while deleting words
  * for example: " /?\"&[]"
  */
-static const char worddelimiters[] = "  /?\"&[]";
+static const char worddelimiters[] = " /?\"&[]";
