@@ -135,7 +135,7 @@ index 5e4d494..e3662ca 100644
 -{
 +arrangemon(Monitor *m) {
 +	updatebarpos(m);
-+	XMoveResizeWindow(dpy, m->tabwin, m->wx + selmon->gappx, m->ty, m->ww - 2 * selmon->gappx, th);
++	XMoveResizeWindow(dpy, m->tabwin, m->wx + selmon->gappx + borderpx, m->ty, m->ww - 2 * selmon->gappx - 2 * borderpx, th);
  	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
  	if (m->lt[m->sellt]->arrange)
  		m->lt[m->sellt]->arrange(m);
@@ -392,7 +392,7 @@ index 5e4d494..e3662ca 100644
  void
  togglefloating(const Arg *arg)
  {
-@@ -1819,6 +1984,11 @@ updatebars(void)
+@@ -1819,6 +1984,12 @@ updatebars(void)
  				CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
  		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
  		XMapRaised(dpy, m->barwin);
@@ -402,9 +402,10 @@ index 5e4d494..e3662ca 100644
 +		XDefineCursor(dpy, m->tabwin, cursor[CurNormal]->cursor);
 +		XMapRaised(dpy, m->tabwin);
  		XSetClassHint(dpy, m->barwin, &ch);
++ 		XSetClassHint(dpy, m->tabwin, &ch);
  	}
  }
-@@ -1826,14 +1996,33 @@ updatebarpos(Monitor *m)
+@@ -1826,14 +1996,30 @@ updatebarpos(Monitor *m)
  void
  updatebarpos(Monitor *m)
  {
@@ -416,10 +417,8 @@ index 5e4d494..e3662ca 100644
  	if (m->showbar) {
                 m->wh = m->wh - vp - bh;
 		m->by = m->topbar ? m->wy : m->wy + m->wh + vp;
--		m->wy = m->topbar ? m->wy + bh + vp : m->wy;
+		m->wy = m->topbar ? m->wy + bh + vp : m->wy;
 -	} else
-+		if ( m->topbar )
-+			m->wy += bh + vp;
 +	} else {
  		m->by = -bh - vp;
 +	}
@@ -428,17 +427,15 @@ index 5e4d494..e3662ca 100644
 +		if(ISVISIBLE(c)) ++nvis;
 +	}
 +
-+	if(m->showtab == showtab_always
-+	   || ((m->showtab == showtab_auto) && (nvis > 1) && (m->lt[m->sellt]->arrange == monocle))) {
++	if(m->showtab == showtab_always || ((m->showtab == showtab_auto) && (nvis > 1) && (m->lt[m->sellt]->arrange == monocle))) {
 +		m->wh -= th;
 +		m->ty = m->toptab ? m->wy + selmon->gappx : m->wy + m->wh - selmon->gappx;
-+		if ( m->toptab )
-+			m->wy += th;
++		m->wy = m->toptab ? m->wy + th : m->wy - th;
 +	} else {
 +		m->ty = -th;
 +	}
  }
- 
+
  void
 @@ -2070,7 +2259,7 @@ wintomon(Window w)
  	if (w == root && getrootptr(&x, &y))

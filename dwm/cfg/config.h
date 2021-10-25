@@ -6,14 +6,14 @@
  */
 
 /* gaps between windows */
-static const unsigned int gappx = 28;
+static const unsigned int gappx = 18;
 /* border pixel of windows */
-static const unsigned int borderpx = 4;
+static const unsigned int borderpx = 3;
 
 /* vertical padding of bar */
-static const int vertpad = 0;
+static const int vertpad = gappx / 3;
 /* horizontal padding of bar */
-static const int horizpad = 0;
+static const int horizpad = gappx / 2;
 
 /* vertical padding on text */
 static const int verttxtpad = 2;
@@ -21,7 +21,7 @@ static const int verttxtpad = 2;
 static const int horiztxtpad = 4;
 
 /* user defined bar height */
-static const int barheight = 28;
+static const int barheight = 26;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -33,33 +33,33 @@ static const int decorhints = 1;
 
 /* Possible tab bar modes */
 enum showtab_modes {
-  showtab_never,
-  showtab_auto,
-  showtab_nmodes,
-  showtab_always
+    showtab_never,
+    showtab_auto,
+    showtab_nmodes,
+    showtab_always
 };
 
 /* User defined tab bar height */
-static const int tabheight = 20;
+static const int tabheight = 16;
 /* Default tab bar show mode */
 static const int showtab = showtab_auto;
 /* 0 means bottom tab bar */
 static const int toptab = 1;
 
 static const char *fonts[] = {
-    "Source Code Pro:pixelsize=16:antialias=true:autohint=false",
+    "PT Mono:pixelsize=16:antialias=true:autohint=false",
     "TerminessTTF Nerd Font:pixelsize=16:antialias=true:autohint=false",
 };
 
 typedef struct {
-  const char *name;
-  const void *cmd;
+    const char *name;
+    const void *cmd;
 } Sp;
 
 const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "144x41", "-e",
-                        "tmux", "new", "-A",     "-s", "spterm", NULL};
+    "tmux", "new", "-A",     "-s", "spterm", NULL};
 const char *spcmd2[] = {"st",     "-n", "spfm",   "-g",
-                        "120x34", "-e", "ranger", NULL};
+    "120x34", "-e", "ranger", NULL};
 const char *spcmd3[] = {"keepass2", NULL};
 
 static Sp scratchpads[] = {
@@ -116,8 +116,8 @@ static const Layout layouts[] = {
 #define SuperMask Mod4Mask
 
 #define TAGKEYS(KEY, TAG)                                                      \
-  {SuperMask, KEY, view, {.ui = 1 << TAG}},                                      \
-  {SuperMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
+{SuperMask, KEY, view, {.ui = 1 << TAG}},                                      \
+{SuperMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
 
 static Key keys[] = {
     /* modifier, key, function, argument */
@@ -168,7 +168,7 @@ static Key keys[] = {
 
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
-    /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
+        /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
 };
 
 /* button definitions */
