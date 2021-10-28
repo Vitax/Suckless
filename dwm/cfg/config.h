@@ -40,7 +40,7 @@ enum showtab_modes {
 };
 
 /* User defined tab bar height */
-static const int tabheight = 16;
+static const int tabheight = 20;
 /* Default tab bar show mode */
 static const int showtab = showtab_auto;
 /* 0 means bottom tab bar */

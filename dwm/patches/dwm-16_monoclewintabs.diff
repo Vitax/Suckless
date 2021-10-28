@@ -127,15 +127,18 @@ index 5e4d494..e3662ca 100644
  static int lrpad;            /* sum of left and right padding for text */
  static int (*xerrorxlib)(Display *, XErrorEvent *);
  static unsigned int numlockmask = 0;
-@@ -393,8 +404,9 @@ arrange(Monitor *m)
+@@ -393,8 +404,12 @@ arrange(Monitor *m)
  }
  
  void
 -arrangemon(Monitor *m)
 -{
 +arrangemon(Monitor *m) {
++ 	m->topbar = (m->showtab && (m->lt[m->sellt]->arrange == monocle)) ? 0 : 1;
 +	updatebarpos(m);
-+	XMoveResizeWindow(dpy, m->tabwin, m->wx + selmon->gappx + borderpx, m->ty, m->ww - 2 * selmon->gappx - 2 * borderpx, th);
++ 	XMoveResizeWindow(dpy, m->tabwin, m->wx + selmon->gappx + borderpx, m->ty, m->ww - 2 * selmon->gappx - 2 * borderpx, th);
++ 	m->by = (m->showtab && (m->lt[m->sellt]->arrange == monocle)) ? m->by + 2 * vp - selmon->gappx : m->by + vp;
++ 	XMoveResizeWindow(dpy, m->barwin, m->wx + sp, m->by, m->ww - 2 * sp, bh);
  	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
  	if (m->lt[m->sellt]->arrange)
  		m->lt[m->sellt]->arrange(m);
