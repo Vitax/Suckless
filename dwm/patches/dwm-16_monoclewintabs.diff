@@ -137,7 +137,7 @@ index 5e4d494..e3662ca 100644
 + 	m->topbar = (m->showtab && (m->lt[m->sellt]->arrange == monocle)) ? 0 : 1;
 +	updatebarpos(m);
 + 	XMoveResizeWindow(dpy, m->tabwin, m->wx + selmon->gappx + borderpx, m->ty, m->ww - 2 * selmon->gappx - 2 * borderpx, th);
-+ 	m->by = (m->showtab && (m->lt[m->sellt]->arrange == monocle)) ? m->by + 2 * vp - selmon->gappx : m->by + vp;
++ 	m->by = (m->showtab && (m->lt[m->sellt]->arrange == monocle)) ? m->by - vp : m->by + vp;
 + 	XMoveResizeWindow(dpy, m->barwin, m->wx + sp, m->by, m->ww - 2 * sp, bh);
  	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
  	if (m->lt[m->sellt]->arrange)

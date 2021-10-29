@@ -6,14 +6,14 @@
  */
 
 /* gaps between windows */
-static const unsigned int gappx = 18;
+static const unsigned int gappx = 24;
 /* border pixel of windows */
 static const unsigned int borderpx = 3;
 
 /* vertical padding of bar */
 static const int vertpad = gappx / 3;
 /* horizontal padding of bar */
-static const int horizpad = gappx / 2;
+static const int horizpad = gappx * 3;
 
 /* vertical padding on text */
 static const int verttxtpad = 2;
