@@ -11,17 +11,17 @@ static const unsigned int gappx = 24;
 static const unsigned int borderpx = 3;
 
 /* vertical padding of bar */
-static const int vertpad = gappx / 3;
+static const int vertpad = 0;
 /* horizontal padding of bar */
-static const int horizpad = gappx * 3;
+static const int horizpad = 0;
 
 /* vertical padding on text */
-static const int verttxtpad = 2;
+static const int verttxtpad = 8;
 /* horizontal padding on text */
-static const int horiztxtpad = 4;
+static const int horiztxtpad = 8;
 
 /* user defined bar height */
-static const int barheight = 26;
+static const int barheight = 24;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -47,7 +47,7 @@ static const int showtab = showtab_auto;
 static const int toptab = 1;
 
 static const char *fonts[] = {
-    "PT Mono:pixelsize=16:antialias=true:autohint=false",
+    "Source Code Pro:pixelsize=16:antialias=true:autohint=false",
     "TerminessTTF Nerd Font:pixelsize=16:antialias=true:autohint=false",
 };
 

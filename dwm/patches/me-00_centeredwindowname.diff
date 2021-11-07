@@ -8,7 +8,7 @@ width,instead of the whole bar width
 
  	if ((w = m->ww - tw - x) > bh) {
  		if (m->sel) {
-+            /* fix overflow when window name is bigger than window width */
++			/* fix overflow when window name is bigger than window width */
 +			int mid = (w - 2 * sp - (int)TEXTW(m->sel->name)) / 2;
 +			/* make sure name will not overlap on tags even when it is very long */
 +			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
@@ -19,5 +19,13 @@ width,instead of the whole bar width
  				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
  		} else {
 --
+
+@@ -948,2 +948,4 @@ drawtabs(Monitor *m)
+ 	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeTabNorm]);
++         int mid = (w - 2 * horiztextpad - (int)TEXTW(c->name)) / 2;
++         mid = mid >= lrpad / 2 ? mid : lrpad / 2;
+- 	  drw_text(drw, x + horiztxtpad / 2, verttxtpad / 2, w - horiztxtpad, th - verttxtpad, lrpad / 2, c->name, 0);
++ 	  drw_text(drw, x + horiztxtpad / 2, verttxtpad / 2, w - horiztxtpad, th - verttxtpad, mid, c->name, 0);
+
 2.27.0
 

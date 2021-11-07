@@ -23,19 +23,25 @@
  	} 
 	if(ev->window == selmon->tabwin) {
 		i = 0; x = 0;
-@@ -730,15 +728,8 @@ drawbar(Monitor *m)
+@@ -730,19 +728,8 @@ drawbar(Monitor *m)
  	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
  
  	if ((w = m->ww - tw - x) > bh) {
 -		if (m->sel) {
+-                       /* fix overflow when window name is bigger than window width */
+-			int mid = (w - 2 * sp - (int)TEXTW(m->sel->name)) / 2;
+-			/* make sure name will not overlap on tags even when it is very long */
+-			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
 -			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
--			drw_text(drw, x, 0, w - 2 * sp, bh, lrpad / 2, m->sel->name, 0);
+-			drw_text(drw, x, 0, w - 2 * sp, bh, mid, m->sel->name, 0);
 -			if (m->sel->isfloating)
 -				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 -		} else {
-			drw_setscheme(drw, scheme[SchemeNorm]);
-			drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
+-			drw_setscheme(drw, scheme[SchemeNorm]);
+-			drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
 -		}
++		drw_setscheme(drw, scheme[SchemeNorm]);
++		drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
  	}
  	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
  }
