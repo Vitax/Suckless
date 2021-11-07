@@ -60,7 +60,7 @@ index 5e4d494..e3662ca 100644
 +++ b/dwm.c
 @@ -72,9 +72,9 @@ enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
 -enum { SchemeNorm, SchemeSel, SchemeUrg }; /* color schemes */
-+enum { SchemeNorm, SchemeSel, SchemeUrg, SchemeTab, SchemeTabNorm, SchemeTabSel }; /* color schemes */
++enum { SchemeNorm, SchemeSel, SchemeUrg, SchemeTabNorm, SchemeTabSel }; /* color schemes */
  enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
         NetWMFullscreen, NetActiveWindow, NetWMWindowType,
         NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
@@ -274,7 +274,7 @@ index 5e4d494..e3662ca 100644
 +	  maxsize = m->ww;
 +	}
 +
-+       drw_setscheme(drw, scheme[SchemeTab]);
++       drw_setscheme(drw, scheme[SchemeTabNorm]);
 +       drw_rect(drw, 0, 0, m->ww, th, 1, 1);
 +
 +	i = 0;
@@ -290,7 +290,7 @@ index 5e4d494..e3662ca 100644
 +	}
 +
 +	/* cleans interspace between window names and current viewed tag label */
-+       drw_setscheme(drw, scheme[SchemeTab]);
++       drw_setscheme(drw, scheme[SchemeTabNorm]);
 +	w = m->ww - view_info_w - x;
 +	drw_text(drw, x + horiztxtpad / 2, verttxtpad / 2, w - horiztxtpad, th - verttxtpad, lrpad / 2, "", 0);
 +

@@ -4,6 +4,14 @@
 /*
  * appearance
  */
+/* horizontal padding between the underline and tag */
+static const unsigned int ulinepad	= 6;	
+/* thickness / height of the underline */
+static const unsigned int ulinestroke	= 4;	
+/* how far above the bottom of the bar the line should appear */
+static const unsigned int ulinevoffset	= 0;	
+/* 1 to show underline on all tags, 0 for just the active ones */
+static const int ulineall 		= 0;	
 
 /* gaps between windows */
 static const unsigned int gappx = 24;
