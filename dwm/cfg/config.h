@@ -19,9 +19,9 @@ static const unsigned int gappx = 24;
 static const unsigned int borderpx = 3;
 
 /* vertical padding of bar */
-static const int vertpad = 0;
+static const int vertbarpad = 0;
 /* horizontal padding of bar */
-static const int horizpad = 0;
+static const int horizbarpad = 0;
 
 /* vertical padding on text */
 static const int verttxtpad = 8;

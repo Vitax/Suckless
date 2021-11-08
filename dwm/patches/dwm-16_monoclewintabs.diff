@@ -204,7 +204,7 @@ index 5e4d494..e3662ca 100644
  	m->lt[0] = &layouts[0];
  	m->lt[1] = &layouts[1 % LENGTH(layouts)];
  	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
-@@ -752,6 +787,102 @@ drawbars(void)
+@@ -752,6 +787,97 @@ drawbars(void)
  		drawbar(m);
  }
  
@@ -254,7 +254,7 @@ index 5e4d494..e3662ca 100644
 +	m->ntabs = 0;
 +	for(c = m->clients; c; c = c->next){
 +	  if(!ISVISIBLE(c)) continue;
-+	  m->tab_widths[m->ntabs] = MIN(TEXTW(c->name) + 2 * horiztxtpad, 250);
++	  m->tab_widths[m->ntabs] = MIN((int)TEXTW(c->name) + 2 * horiztxtpad, 250);
 +	  tot_width += m->tab_widths[m->ntabs];
 +	  ++m->ntabs;
 +	  if(m->ntabs >= MAXTABS) break;
@@ -288,11 +288,6 @@ index 5e4d494..e3662ca 100644
 +	  x += w;
 +	  ++i;
 +	}
-+
-+	/* cleans interspace between window names and current viewed tag label */
-+       drw_setscheme(drw, scheme[SchemeTabNorm]);
-+	w = m->ww - view_info_w - x;
-+	drw_text(drw, x + horiztxtpad / 2, verttxtpad / 2, w - horiztxtpad, th - verttxtpad, lrpad / 2, "", 0);
 +
 +	drw_map(drw, m->tabwin, 0, 0, m->ww, th);
 +}

@@ -1,7 +1,7 @@
 --- st/x.c
 +++ st/x.c
 
-@@ -233,6 +233,10 @@ static char *usedfont = NULL
+@@ -233,6 +233,11 @@ static char *usedfont = NULL
  static double usedfontsize = 0
  static double defaultfontsize = 0;
 
@@ -13,15 +13,16 @@
  static char *opt_class = NULL;
  static char **opt_cmd  = NULL;
  static char *opt_embed = NULL;
-@@ -960,7 +965,10 @@ xloadfonts(char *fontstr, double fontsize)
+@@ -960,8 +965,11 @@ xloadfonts(char *fontstr, double fontsize)
         win.ch = ceilf(dc.font.height * chscale);
+	win.cyo = ceilf(dc.font.height * (chscale - 1) / 2);
 
-        FCPatternDel(pattern, FC_SLANT);
--       FCPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
-+       if (!disableitalic)
-+               FCPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
-+       if (!disableroman)
-+               FCPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ROMAN);
-        if (xloadfont(&dc.ifontn, pattern))
-            die("can't opent font %s\n", fontstr)
+        FcPatternDel(pattern, FC_SLANT);
+-       FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
++	if (!disableitalic)
++		FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ITALIC);
++	if (!disableroman)
++		FcPatternAddInteger(pattern, FC_SLANT, FC_SLANT_ROMAN);
+	if (xloadfont(&dc.ifont, pattern))
+		die("can't open font %s\n", fontstr);
 

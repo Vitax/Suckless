@@ -1,6 +1,6 @@
 // NOTE: remember to add to config.h:
-// static const int vertpad         = 10;   /* vertical padding of bar */
-// static const int sidepad         = 10;   /* horizontal padding of bar */
+// static const int vertbarpad         = 10;   /* vertical padding of bar */
+// static const int horizbarpad         = 10;   /* horizontal padding of bar */
 --- dwm/dwm.c	2019-12-10 17:24:37.945708263 +1300
 +++ dwm/dwm.c	2019-12-10 17:41:46.192676099 +1300
 @@ -241,6 +241,8 @@ static int screen;
@@ -49,8 +49,8 @@
  	lrpad = drw->fonts->h;
  	bh = drw->fonts->h + 2;
  	updategeom();
-+	sp = horizpad;
-+	vp = (topbar == 1) ? vertpad : - vertpad;
++	sp = horizbarpad;
++	vp = (topbar == 1) ? vertbarpad : - vertbarpad;
 +
  	/* init atoms */
  	utf8string = XInternAtom(dpy, "UTF8_STRING", False);

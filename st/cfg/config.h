@@ -12,6 +12,12 @@ static char *plumb_cmd = "opn";
 // look into using scroll later!
 char *scroll = NULL;
 
+// 
+static int disablebold = 0;
+static int disableitalic = 0;
+static int disableroman = 0;
+
+// set inner padding
 static int borderpx = 32;
 
 /*
