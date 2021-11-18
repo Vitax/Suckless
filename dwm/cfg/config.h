@@ -14,22 +14,22 @@ static const unsigned int ulinevoffset = 2;
 static const int ulineall = 0;
 
 /* gaps between windows */
-static const unsigned int gappx = 0;
+static const unsigned int gappx = 32;
 /* border pixel of windows */
-static const unsigned int borderpx = 3;
+static const unsigned int borderpx = 0;
 
 /* vertical padding of bar */
-static const int vertbarpad = 0;
+static const int vertbarpad = gappx / 4;
 /* horizontal padding of bar */
-static const int horizbarpad = 0;
+static const int horizbarpad = gappx * 4;
 
 /* vertical padding on text */
-static const int verttxtpad = 8;
+static const int verttxtpad = 4;
 /* horizontal padding on text */
 static const int horiztxtpad = 8;
 
 /* user defined bar height */
-static const int barheight = 20;
+static const int barheight = 24;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -48,7 +48,7 @@ enum showtab_modes {
 };
 
 /* User defined tab bar height */
-static const int tabheight = 16;
+static const int tabheight = 18;
 /* Default tab bar show mode */
 static const int showtab = showtab_auto;
 /* 0 means bottom tab bar */
