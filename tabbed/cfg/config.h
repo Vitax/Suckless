@@ -3,7 +3,7 @@
 /* appearance */
 #include <tabbed.h>
 
-static char font[] = "TerminessTTF Nerd Font:pixelsize=16:antialias=true";
+static char font[] = "PT Mono:pixelsize=16:antialias=true";
 
 static const int barHeight = 24;
 

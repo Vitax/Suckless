@@ -5,16 +5,16 @@
  * appearance
  */
 /* horizontal padding between the underline and tag */
-static const unsigned int ulinepad	= 6;	
+static const unsigned int ulinepad = 6;
 /* thickness / height of the underline */
-static const unsigned int ulinestroke	= 4;	
+static const unsigned int ulinestroke = 4;
 /* how far above the bottom of the bar the line should appear */
-static const unsigned int ulinevoffset	= 0;	
+static const unsigned int ulinevoffset = 2;
 /* 1 to show underline on all tags, 0 for just the active ones */
-static const int ulineall 		= 0;	
+static const int ulineall = 0;
 
 /* gaps between windows */
-static const unsigned int gappx = 24;
+static const unsigned int gappx = 0;
 /* border pixel of windows */
 static const unsigned int borderpx = 3;
 
@@ -29,7 +29,7 @@ static const int verttxtpad = 8;
 static const int horiztxtpad = 8;
 
 /* user defined bar height */
-static const int barheight = 24;
+static const int barheight = 20;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -41,44 +41,47 @@ static const int decorhints = 1;
 
 /* Possible tab bar modes */
 enum showtab_modes {
-    showtab_never,
-    showtab_auto,
-    showtab_nmodes,
-    showtab_always
+  showtab_never,
+  showtab_auto,
+  showtab_nmodes,
+  showtab_always
 };
 
 /* User defined tab bar height */
-static const int tabheight = 20;
+static const int tabheight = 16;
 /* Default tab bar show mode */
 static const int showtab = showtab_auto;
 /* 0 means bottom tab bar */
 static const int toptab = 1;
 
 static const char *fonts[] = {
-    "Source Code Pro:pixelsize=16:antialias=true:autohint=false",
-    "TerminessTTF Nerd Font:pixelsize=16:antialias=true:autohint=false",
+    "PT Mono:pixelsize=16:antialias=true",
+    "TerminessTTF Nerd Font:pixelsize=16:antialias=true",
 };
 
 typedef struct {
-    const char *name;
-    const void *cmd;
+  const char *name;
+  const void *cmd;
 } Sp;
 
-const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "144x41", "-e",
-    "tmux", "new", "-A",     "-s", "spterm", NULL};
+const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "152x44", "-e",
+                        "tmux", "new", "-A",     "-s", "spterm", NULL};
 const char *spcmd2[] = {"st",     "-n", "spfm",   "-g",
-    "120x34", "-e", "ranger", NULL};
+                        "110x30", "-e", "ranger", NULL};
 const char *spcmd3[] = {"keepass2", NULL};
+const char *spcmd4[] = {"st",     "-n", "sptop", "-g",
+                        "144x41", "-e", "gotop", NULL};
 
 static Sp scratchpads[] = {
     /* name, cmd  */
     {"spterm", spcmd1},
     {"spranger", spcmd2},
     {"KeePass", spcmd3},
+    {"sptop", spcmd4},
 };
 
 /* tagging */
-static const char *tags[] = {"1", "2", "3", "4", "5", "6"};
+static const char *tags[] = {"1", "2", "3", "4", "5", "6", "0"};
 
 static const Rule rules[] = {
     /* xprop(1):
@@ -87,15 +90,7 @@ static const Rule rules[] = {
      */
 
     /* class/instance, title, tags, mask, iscentered, isfloating, monitor */
-    {"feh", NULL, NULL, 0, 1, 1, -1},
-    {"pcmanfm", NULL, NULL, 0, 1, 1, -1},
-    {"Pcmanfm", NULL, NULL, 0, 1, 1, -1},
-    {"mpv", NULL, NULL, 0, 1, 1, -1},
-    {"arandr", NULL, NULL, 0, 1, 1, -1},
-    {"Arandr", NULL, NULL, 0, 1, 1, -1},
-    {"sxiv", NULL, NULL, 0, 1, 1, -1},
-    {"Sxiv", NULL, NULL, 0, 1, 1, -1},
-    {"htop", NULL, NULL, 0, 1, 1, -1},
+    {NULL, "sptop", NULL, 0, 1, 1, -1},
     {NULL, "spterm", NULL, SPTAG(0), 1, 1, -1},
     {NULL, "spfm", NULL, SPTAG(1), 1, 1, -1},
     {"KeePass", NULL, NULL, SPTAG(2), 1, 1, -1},
@@ -124,8 +119,8 @@ static const Layout layouts[] = {
 #define SuperMask Mod4Mask
 
 #define TAGKEYS(KEY, TAG)                                                      \
-{SuperMask, KEY, view, {.ui = 1 << TAG}},                                      \
-{SuperMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
+  {SuperMask, KEY, view, {.ui = 1 << TAG}},                                    \
+      {SuperMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
 
 static Key keys[] = {
     /* modifier, key, function, argument */
@@ -174,9 +169,10 @@ static Key keys[] = {
 
     {SuperMask | AltMask | ShiftMask, XK_q, quit, {0}},
 
-    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
-        TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
-        /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
+    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2)
+    TAGKEYS(XK_4, 3) TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
+    /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
+    TAGKEYS(XK_0, 6)
 };
 
 /* button definitions */

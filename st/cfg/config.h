@@ -4,7 +4,7 @@
  * appearance
  */
 
-static char font[] = "Source Code Pro:pixelsize=16:antialias=true:autohint=true";
+static char font[] = "PT Mono:pixelsize=16:antialias=true";
 
 // plumber patch
 static char *plumb_cmd = "opn";
