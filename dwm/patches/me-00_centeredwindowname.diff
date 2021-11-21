@@ -18,14 +18,14 @@ width,instead of the whole bar width
  			if (m->sel->isfloating)
  				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
  		} else {
---
-
-@@ -948,2 +948,4 @@ drawtabs(Monitor *m)
+@@ -948,2 +948,4 @@ drawtab(Monitor *m)
  	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeTabNorm]);
-+         int mid = (w - horiztxtpad - (int)TEXTW(c->name)) / 2;
-+         mid = mid >= horiztextpad / 2 ? mid : horiztxtpad / 2;
++	  int mid = (w - horiztxtpad - (int)TEXTW(c->name));
++	  mid = mid >= horiztxtpad / 2 ? mid : horiztxtpad / 2;
 - 	  drw_text(drw, x + horiztxtpad / 2, verttxtpad / 2, w - horiztxtpad, th - verttxtpad, lrpad / 2, c->name, 0);
 + 	  drw_text(drw, x + horiztxtpad / 2, verttxtpad / 2, w - horiztxtpad, th - verttxtpad, mid, c->name, 0);
 
 2.27.0
+
+--
 

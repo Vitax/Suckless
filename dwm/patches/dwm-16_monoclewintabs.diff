@@ -254,7 +254,7 @@ index 5e4d494..e3662ca 100644
 +	m->ntabs = 0;
 +	for(c = m->clients; c; c = c->next){
 +	  if(!ISVISIBLE(c)) continue;
-+	  m->tab_widths[m->ntabs] = MIN((int)TEXTW(c->name) + 2 * horiztxtpad, 250);
++	  m->tab_widths[m->ntabs] = MIN((int)TEXTW(c->name) + lrpad, 250);
 +	  tot_width += m->tab_widths[m->ntabs];
 +	  ++m->ntabs;
 +	  if(m->ntabs >= MAXTABS) break;
@@ -369,7 +369,7 @@ index 5e4d494..e3662ca 100644
  		die("no fonts could be loaded.");
  	lrpad = drw->fonts->h;
 	bh = barheight ? barheight + verttxtpad : drw->fonts->h + verttxtpad;
-+	th = tabheight ? tabheight + verttxtpad : drw->fonts->h + verttxtpad;
++	th = tabheight ? tabheight + verttabpad : drw->fonts->h + verttabpad;
  	updategeom();
  	/* init atoms */
  	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
