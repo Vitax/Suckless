@@ -14,7 +14,7 @@ static const unsigned int ulinevoffset = 2;
 static const int ulineall = 0;
 
 /* gaps between windows */
-static const unsigned int gappx = 24;
+static const unsigned int gappx = 12;
 /* border pixel of windows */
 static const unsigned int borderpx = 3;
 
@@ -26,12 +26,12 @@ static const int horizbarpad = gappx * 4;
 /* vertical padding of tab */
 static const int verttabpad = 8;
 /* horizontal padding of tab */
-static const int horiztabpad = 8;
+static const int horiztabpad = 4;
 
 /* vertical padding on text */
 static const int verttxtpad = 4;
 /* horizontal padding on text */
-static const int horiztxtpad = 8;
+static const int horiztxtpad = 4;
 
 /* user defined bar height */
 static const int barheight = 28;
