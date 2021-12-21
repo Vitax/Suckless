@@ -284,7 +284,7 @@ index 5e4d494..e3662ca 100644
 +	  if(m->tab_widths[i] >  maxsize) m->tab_widths[i] = maxsize;
 +	  w = m->tab_widths[i];
 +	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeTabNorm]);
-+	  drw_text(drw, x + horiztxtpad / 2, verttxtpad / 2, w - horiztxtpad, th - verttxtpad, lrpad / 2, c->name, 0);
++	  drw_text(drw, x + horiztabpad / 2, verttabpad / 2, w - horiztabpad, th - verttabpad, lrpad / 2, c->name, 0);
 +	  x += w;
 +	  ++i;
 +	}

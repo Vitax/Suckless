@@ -18,20 +18,22 @@ static const unsigned int gappx = 12;
 /* border pixel of windows */
 static const unsigned int borderpx = 3;
 
+/* enable bar padding */
+static const int barpadding = 0;
 /* vertical padding of bar */
-static const int vertbarpad = gappx / 4;
+static const int vertbarpad = barpadding ? gappx / 4 : 0;
 /* horizontal padding of bar */
-static const int horizbarpad = gappx * 4;
+static const int horizbarpad = barpadding ? gappx * 4 : 0;
 
 /* vertical padding of tab */
-static const int verttabpad = 8;
+static const int verttabpad = 4;
 /* horizontal padding of tab */
 static const int horiztabpad = 4;
 
 /* vertical padding on text */
-static const int verttxtpad = 4;
+static const int verttxtpad = 2;
 /* horizontal padding on text */
-static const int horiztxtpad = 4;
+static const int horiztxtpad = 0;
 
 /* user defined bar height */
 static const int barheight = 28;
@@ -60,8 +62,8 @@ static const int showtab = showtab_auto;
 static const int toptab = 1;
 
 static const char *fonts[] = {
-    "PT Mono:pixelsize=16:antialias=true",
-    "TerminessTTF Nerd Font:pixelsize=16:antialias=true",
+    "PT Mono:pixelsize=14:antialias=true",
+    "Iosevka:pixelsize=16:antialias=true",
 };
 
 typedef struct {
