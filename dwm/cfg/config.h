@@ -16,7 +16,7 @@ static const int ulineall = 0;
 /* gaps between windows */
 static const unsigned int gappx = 12;
 /* border pixel of windows */
-static const unsigned int borderpx = 3;
+static const unsigned int borderpx = 0;
 
 /* enable bar padding */
 static const int barpadding = 0;
@@ -62,7 +62,7 @@ static const int showtab = showtab_auto;
 static const int toptab = 1;
 
 static const char *fonts[] = {
-    "PT Mono:pixelsize=14:antialias=true",
+    "PT Mono:pixelsize=14:style=bold:antialias=true",
     "Iosevka:pixelsize=16:antialias=true",
 };
 

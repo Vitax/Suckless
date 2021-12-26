@@ -4,7 +4,7 @@
  * appearance
  */
 
-static char font[] = "PT Mono:pixelsize=16:antialias=true";
+static char font[] = "PT Mono:pixelsize=14:antialias=true";
 
 // plumber patch
 static char *plumb_cmd = "opn";
@@ -462,5 +462,5 @@ static uint selmasks[] = {
  * of single wide characters.
  */
 static char ascii_printable[] = " !\"#$%&'()*+,-./0123456789:;<=>?"
-                                "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
-                                "`abcdefghijklmnopqrstuvwxyz{|}~";
+    "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
+    "`abcdefghijklmnopqrstuvwxyz{|}~";
