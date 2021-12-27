@@ -11,18 +11,15 @@
  
  typedef union {
  	int i;
-@@ -440,10 +440,8 @@ buttonpress(XEvent *e)
- 			arg.ui = 1 << i;
- 		} else if (ev->x < x + blw)
- 			click = ClkLtSymbol;
--		else if (ev->x > selmon->ww - (int)TEXTW(stext))
--			click = ClkStatusText;
- 		else
+@@ -440,7 +440,6 @@ buttonpress(XEvent *e)
+					statussig = ch;
+				}
+			}
+-		} else
++		}
 -			click = ClkWinTitle;
-+			click = ClkStatusText;
- 	} 
-	if(ev->window == selmon->tabwin) {
-		i = 0; x = 0;
+ 	}
+ 	if(ev->window == selmon->tabwin) {
 @@ -730,19 +728,8 @@ drawbar(Monitor *m)
  	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
  

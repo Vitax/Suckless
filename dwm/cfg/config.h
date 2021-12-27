@@ -1,5 +1,7 @@
 // imports
 #include <dwm.h>
+ 
+#define STATUSBAR "dwmblocks"
 
 /*
  * appearance
@@ -33,7 +35,7 @@ static const int horiztabpad = 4;
 /* vertical padding on text */
 static const int verttxtpad = 2;
 /* horizontal padding on text */
-static const int horiztxtpad = 0;
+static const int horiztxtpad = 8;
 
 /* user defined bar height */
 static const int barheight = 28;
@@ -192,6 +194,9 @@ static Button buttons[] = {
     {ClkClientWin, SuperMask, Button1, movemouse, {0}},
     {ClkClientWin, SuperMask, Button2, togglefloating, {0}},
     {ClkClientWin, SuperMask, Button3, resizemouse, {0}},
+    {ClkStatusText, 0, Button1, sigstatusbar, {.i = 1}},
+    {ClkStatusText, 0, Button2, sigstatusbar, {.i = 2}},
+    {ClkStatusText, 0, Button3, sigstatusbar, {.i = 3}},
     {ClkTagBar, 0, Button1, view, {0}},
     {ClkTagBar, 0, Button3, toggleview, {0}},
     {ClkTabBar, 0, Button1, focuswin, {0}},
