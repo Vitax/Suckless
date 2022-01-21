@@ -18,7 +18,7 @@ static const int ulineall = 0;
 /* gaps between windows */
 static const unsigned int gappx = 12;
 /* border pixel of windows */
-static const unsigned int borderpx = 0;
+static const unsigned int borderpx = 3;
 
 /* enable bar padding */
 static const int barpadding = 0;
@@ -64,8 +64,8 @@ static const int showtab = showtab_auto;
 static const int toptab = 1;
 
 static const char *fonts[] = {
-    "PT Mono:pixelsize=14:style=bold:antialias=true",
-    "Iosevka:pixelsize=16:antialias=true",
+    "Fantasque Sans Mono:pixelsize=18:antialias=true",
+    "JetBrains Nerd Mono:pixelsize=16:antialias=true",
 };
 
 typedef struct {
@@ -73,20 +73,17 @@ typedef struct {
   const void *cmd;
 } Sp;
 
-const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "152x44", "-e",
-                        "tmux", "new", "-A",     "-s", "spterm", NULL};
-const char *spcmd2[] = {"st",     "-n", "spfm",   "-g",
-                        "110x30", "-e", "ranger", NULL};
+const char *spcmd1[] = {"kitty","-o", "remember_window_size=no", "-o", "initial_window_width=960", "-o", "initial_window_height=720", "--name",  "spterm", "-e", "tmux", "new", "-A", "-s", "spterm",  NULL};
+const char *spcmd2[] = {"kitty", "-o", "remember_window_size=no", "-o", "initial_window_width=720", "-o", "initial_window_height=480", "--name", "spfm", "-e", "ranger",  NULL};
 const char *spcmd3[] = {"keepass2", NULL};
-const char *spcmd4[] = {"st",     "-n", "sptop", "-g",
-                        "144x41", "-e", "gotop", NULL};
+const char *spcmd4[] = {"kitty", "-o", "remember_window_size=no", "-o", "initial_window_width=1024", "-o", "initial_window_height=720", "--name", "hptop", "-e", "htop", NULL};
 
 static Sp scratchpads[] = {
     /* name, cmd  */
     {"spterm", spcmd1},
     {"spranger", spcmd2},
     {"KeePass", spcmd3},
-    {"sptop", spcmd4},
+    {"hptop", spcmd4},
 };
 
 /* tagging */
@@ -99,10 +96,10 @@ static const Rule rules[] = {
      */
 
     /* class/instance, title, tags, mask, iscentered, isfloating, monitor */
-    {NULL, "sptop", NULL, 0, 1, 1, -1},
     {NULL, "spterm", NULL, SPTAG(0), 1, 1, -1},
     {NULL, "spfm", NULL, SPTAG(1), 1, 1, -1},
     {"KeePass", NULL, NULL, SPTAG(2), 1, 1, -1},
+    {NULL, "hptop", NULL, SPTAG(3), 1, 1, -1},
 };
 
 /* layout(s) */
@@ -162,6 +159,7 @@ static Key keys[] = {
     {SuperMask | ShiftMask, XK_y, togglescratch, {.ui = 0}},
     {SuperMask | ShiftMask, XK_u, togglescratch, {.ui = 1}},
     {SuperMask | ShiftMask, XK_x, togglescratch, {.ui = 2}},
+    {SuperMask | ShiftMask, XK_i, togglescratch, {.ui = 3}},
 
     {SuperMask | ControlMask, XK_m, togglefullscr, {0}},
     {SuperMask | ControlMask, XK_s, togglesticky, {0}},
