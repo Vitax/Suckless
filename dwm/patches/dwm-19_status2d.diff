@@ -71,7 +71,7 @@ index d27cb67..464c9d6 100644
 +	text = p;
 +
 +	w += 2; /* 1px padding on both sides */
-+	ret = x = m->ww - w;
++	ret = x = m->ww - w - 2 * ( horizbarpad + horiztxtpad);
 +
 +	drw_setscheme(drw, scheme[LENGTH(colors)]);
 +	drw->scheme[ColFg] = scheme[SchemeNorm][ColFg];

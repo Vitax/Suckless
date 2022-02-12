@@ -16,16 +16,16 @@ static const unsigned int ulinevoffset = 2;
 static const int ulineall = 0;
 
 /* gaps between windows */
-static const unsigned int gappx = 12;
+static const unsigned int gappx = 8;
 /* border pixel of windows */
 static const unsigned int borderpx = 3;
 
 /* enable bar padding */
-static const int barpadding = 0;
+static const int barpadding = 1;
 /* vertical padding of bar */
-static const int vertbarpad = barpadding ? gappx / 4 : 0;
+static const int vertbarpad = barpadding ? gappx / 2 : 0;
 /* horizontal padding of bar */
-static const int horizbarpad = barpadding ? gappx * 4 : 0;
+static const int horizbarpad = barpadding ? gappx * 2 : 0;
 
 /* vertical padding of tab */
 static const int verttabpad = 4;
@@ -35,7 +35,7 @@ static const int horiztabpad = 4;
 /* vertical padding on text */
 static const int verttxtpad = 2;
 /* horizontal padding on text */
-static const int horiztxtpad = 8;
+static const int horiztxtpad = 4;
 
 /* user defined bar height */
 static const int barheight = 28;
@@ -76,14 +76,14 @@ typedef struct {
 const char *spcmd1[] = {"kitty","-o", "remember_window_size=no", "-o", "initial_window_width=960", "-o", "initial_window_height=720", "--name",  "spterm", "-e", "tmux", "new", "-A", "-s", "spterm",  NULL};
 const char *spcmd2[] = {"kitty", "-o", "remember_window_size=no", "-o", "initial_window_width=720", "-o", "initial_window_height=480", "--name", "spfm", "-e", "ranger",  NULL};
 const char *spcmd3[] = {"keepass2", NULL};
-const char *spcmd4[] = {"kitty", "-o", "remember_window_size=no", "-o", "initial_window_width=1024", "-o", "initial_window_height=720", "--name", "hptop", "-e", "htop", NULL};
+const char *spcmd4[] = {"stalonetray", NULL};
 
 static Sp scratchpads[] = {
     /* name, cmd  */
     {"spterm", spcmd1},
     {"spranger", spcmd2},
     {"KeePass", spcmd3},
-    {"hptop", spcmd4},
+    {"stalonetray", spcmd4},
 };
 
 /* tagging */
@@ -99,7 +99,7 @@ static const Rule rules[] = {
     {NULL, "spterm", NULL, SPTAG(0), 1, 1, -1},
     {NULL, "spfm", NULL, SPTAG(1), 1, 1, -1},
     {"KeePass", NULL, NULL, SPTAG(2), 1, 1, -1},
-    {NULL, "hptop", NULL, SPTAG(3), 1, 1, -1},
+    {"stalonetray", NULL, NULL, SPTAG(3), 1, 1, -1},
 };
 
 /* layout(s) */
@@ -151,8 +151,8 @@ static Key keys[] = {
     {SuperMask | ShiftMask, XK_c, killclient, {0}},
     {SuperMask, XK_F4, killclient, {0}},
 
-    {SuperMask | ShiftMask, XK_t, setlayout, {.v = &layouts[0]}},
-    {SuperMask | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
+    {SuperMask | ShiftMask, XK_f, setlayout, {.v = &layouts[0]}},
+    {SuperMask | ShiftMask, XK_t, setlayout, {.v = &layouts[1]}},
     {SuperMask | ShiftMask, XK_m, setlayout, {.v = &layouts[2]}},
     {SuperMask | ShiftMask, XK_r, setlayout, {.v = &layouts[3]}},
 
