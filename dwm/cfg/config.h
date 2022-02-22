@@ -7,16 +7,16 @@
  * appearance
  */
 /* horizontal padding between the underline and tag */
-static const unsigned int ulinepad = 6;
+static const unsigned int ulinepad = 5;
 /* thickness / height of the underline */
-static const unsigned int ulinestroke = 4;
+static const unsigned int ulinestroke = 3;
 /* how far above the bottom of the bar the line should appear */
-static const unsigned int ulinevoffset = 2;
+static const unsigned int ulinevoffset = 3;
 /* 1 to show underline on all tags, 0 for just the active ones */
 static const int ulineall = 0;
 
 /* gaps between windows */
-static const unsigned int gappx = 8;
+static const unsigned int gappx = 24;
 /* border pixel of windows */
 static const unsigned int borderpx = 3;
 
@@ -25,7 +25,7 @@ static const int barpadding = 1;
 /* vertical padding of bar */
 static const int vertbarpad = barpadding ? gappx / 2 : 0;
 /* horizontal padding of bar */
-static const int horizbarpad = barpadding ? gappx * 2 : 0;
+static const int horizbarpad = barpadding ? gappx * 6 : 0;
 
 /* vertical padding of tab */
 static const int verttabpad = 4;
@@ -38,7 +38,7 @@ static const int verttxtpad = 2;
 static const int horiztxtpad = 4;
 
 /* user defined bar height */
-static const int barheight = 28;
+static const int barheight = 32;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -114,10 +114,10 @@ static const float mfact = 0.50;
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    {"﬿ ", tile},
-    {" ", NULL},
-    {" ", monocle},
-    {" ", bstack},
+    {"[T]", tile},
+    {"><>", NULL},
+    {"[M] ", monocle},
+    {"TTT ", bstack},
 };
 
 /* key definitions */
@@ -151,8 +151,8 @@ static Key keys[] = {
     {SuperMask | ShiftMask, XK_c, killclient, {0}},
     {SuperMask, XK_F4, killclient, {0}},
 
-    {SuperMask | ShiftMask, XK_f, setlayout, {.v = &layouts[0]}},
-    {SuperMask | ShiftMask, XK_t, setlayout, {.v = &layouts[1]}},
+    {SuperMask | ShiftMask, XK_t, setlayout, {.v = &layouts[0]}},
+    {SuperMask | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
     {SuperMask | ShiftMask, XK_m, setlayout, {.v = &layouts[2]}},
     {SuperMask | ShiftMask, XK_r, setlayout, {.v = &layouts[3]}},
 
