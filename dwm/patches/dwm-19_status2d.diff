@@ -70,7 +70,7 @@ index d27cb67..464c9d6 100644
 +		isCode = 0;
 +	text = p;
 +
-+	w += 2 * (horizbarpad + horiztxtpad);
++	w += 2 * (horiztxtpad + sp);
 +	ret = x = m->ww - w;
 +
 +	drw_setscheme(drw, scheme[LENGTH(colors)]);

@@ -18,7 +18,7 @@ static const int ulineall = 0;
 /* gaps between windows */
 static const unsigned int gappx = 24;
 /* border pixel of windows */
-static const unsigned int borderpx = 3;
+static const unsigned int borderpx = 5;
 
 /* enable bar padding */
 static const int barpadding = 1;
@@ -73,8 +73,8 @@ typedef struct {
   const void *cmd;
 } Sp;
 
-const char *spcmd1[] = {"kitty","-o", "remember_window_size=no", "-o", "initial_window_width=960", "-o", "initial_window_height=720", "--name",  "spterm", "-e", "tmux", "new", "-A", "-s", "spterm",  NULL};
-const char *spcmd2[] = {"kitty", "-o", "remember_window_size=no", "-o", "initial_window_width=720", "-o", "initial_window_height=480", "--name", "spfm", "-e", "ranger",  NULL};
+const char *spcmd1[] = {"kitty","-o", "remember_window_size=no", "-o", "initial_window_width=1420", "-o", "initial_window_height=820", "--name",  "spterm", "-e", "tmux", "new", "-A", "-s", "spterm",  NULL};
+const char *spcmd2[] = {"kitty", "-o", "remember_window_size=no", "-o", "initial_window_width=840", "-o", "initial_window_height=600", "--name", "spfm", "-e", "ranger",  NULL};
 const char *spcmd3[] = {"keepass2", NULL};
 const char *spcmd4[] = {"stalonetray", NULL};
 

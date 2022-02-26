@@ -46,11 +46,11 @@
  	}
  	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 @@ -1547,6 +1549,9 @@ setup(void)
- 	lrpad = drw->fonts->h;
- 	bh = drw->fonts->h + 2;
- 	updategeom();
 +	sp = horizbarpad;
 +	vp = (topbar == 1) ? vertbarpad : - vertbarpad;
+  	lrpad = drw->fonts->h;
+	bh = barheight ? barheight : drw->fonts->h + 2;
+ 	updategeom();
 +
  	/* init atoms */
  	utf8string = XInternAtom(dpy, "UTF8_STRING", False);

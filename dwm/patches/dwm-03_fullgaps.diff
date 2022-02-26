@@ -52,8 +52,8 @@ index 9fd0286..45a58f3 100644
 +void
 +setgaps(const Arg *arg)
 +{
-+	if (selmon->gappx + arg->i <= horizbarpad)
-+		selmon->gappx = horizbarpad;
++	if (selmon->gappx + arg->i <= gappx)
++		selmon->gappx = gappx;
 +	else
 +		selmon->gappx += arg->i;
 +	arrange(selmon);
