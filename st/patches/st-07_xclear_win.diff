@@ -10,7 +10,7 @@
 -				 */
 +				if (j == defaultbg)
 +					xclearwin();
- 				redraw();
+				tfulldirt();
  			}
  			return;
 --- st/win.h

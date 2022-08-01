@@ -140,7 +140,7 @@
 
  	/* Render underline and strikethrough. */
  	if (base.mode & ATTR_UNDERLINE) {
--		XftDrawRect(xw.draw, fg, winx, winy + win.cyo + dc.font.ascent + 1,
+-		XftDrawRect(xw.draw, fg, winx, winy + win.cyo + dc.font.ascent * chscale + 1,
 -				width, 1);
 +		// Underline Color
 +		int wlw = 1; // Wave Line Width

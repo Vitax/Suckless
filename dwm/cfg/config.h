@@ -1,31 +1,31 @@
 // imports
 #include <dwm.h>
- 
-#define STATUSBAR "dwmblocks"
+
+#define STATUSBAR "status_info"
 
 /*
  * appearance
  */
 /* horizontal padding between the underline and tag */
-static const unsigned int ulinepad = 5;
+static const unsigned int ulinepad = 6;
 /* thickness / height of the underline */
-static const unsigned int ulinestroke = 3;
+static const unsigned int ulinestroke = 4;
 /* how far above the bottom of the bar the line should appear */
-static const unsigned int ulinevoffset = 3;
+static const unsigned int ulinevoffset = 2;
 /* 1 to show underline on all tags, 0 for just the active ones */
 static const int ulineall = 0;
 
 /* gaps between windows */
-static const unsigned int gappx = 24;
+static const unsigned int gappx = 16;
 /* border pixel of windows */
-static const unsigned int borderpx = 5;
+static const unsigned int borderpx = 3;
 
 /* enable bar padding */
-static const int barpadding = 1;
+static const int barpadding = 0;
 /* vertical padding of bar */
 static const int vertbarpad = barpadding ? gappx / 2 : 0;
 /* horizontal padding of bar */
-static const int horizbarpad = barpadding ? gappx * 6 : 0;
+static const int horizbarpad = barpadding ? gappx : 0;
 
 /* vertical padding of tab */
 static const int verttabpad = 4;
@@ -33,12 +33,12 @@ static const int verttabpad = 4;
 static const int horiztabpad = 4;
 
 /* vertical padding on text */
-static const int verttxtpad = 2;
+static const int verttxtpad = 4;
 /* horizontal padding on text */
 static const int horiztxtpad = 4;
 
 /* user defined bar height */
-static const int barheight = 32;
+static const int barheight = 28;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -57,7 +57,7 @@ enum showtab_modes {
 };
 
 /* User defined tab bar height */
-static const int tabheight = 18;
+static const int tabheight = 24;
 /* Default tab bar show mode */
 static const int showtab = showtab_auto;
 /* 0 means bottom tab bar */
@@ -65,7 +65,7 @@ static const int toptab = 1;
 
 static const char *fonts[] = {
     "Fantasque Sans Mono:pixelsize=18:antialias=true",
-    "JetBrains Nerd Mono:pixelsize=16:antialias=true",
+    "JetBrainsMono Nerd Font:pixelsize=18:antialias=true",
 };
 
 typedef struct {
@@ -73,16 +73,27 @@ typedef struct {
   const void *cmd;
 } Sp;
 
-const char *spcmd1[] = {"kitty","-o", "remember_window_size=no", "-o", "initial_window_width=1420", "-o", "initial_window_height=820", "--name",  "spterm", "-e", "tmux", "new", "-A", "-s", "spterm",  NULL};
-const char *spcmd2[] = {"kitty", "-o", "remember_window_size=no", "-o", "initial_window_width=840", "-o", "initial_window_height=600", "--name", "spfm", "-e", "ranger",  NULL};
-const char *spcmd3[] = {"keepass2", NULL};
+/* const char *spcmd1[] = {"st",   "-n",  "spterm", "-g", "152x44", "-e", */
+/*                         "tmux", "new", "-A",     "-s", "spterm", NULL}; */
+/* const char *spcmd2[] = {"st",     "-n", "spfm",   "-g", */
+/*                         "110x30", "-e", "ranger", NULL}; */
+const char *spcmd1[] = {"kitty", "-o", "remember_window_size=no",
+			"-o", "initial_window_width=1420", "-o",
+                        "initial_window_height=820",
+                        "--name", "spterm",
+                        "-e", "tmux", "new", "-A", "-s", "spterm", NULL};
+const char *spcmd2[] = {"kitty", "-o", "remember_window_size=no",
+                        "-o", "initial_window_width=840",
+                        "-o", "initial_window_height=600",
+                        "--name", "spfm", "-e", "ranger", NULL};
+const char *spcmd3[] = {"keepassxc", NULL};
 const char *spcmd4[] = {"stalonetray", NULL};
 
 static Sp scratchpads[] = {
     /* name, cmd  */
     {"spterm", spcmd1},
     {"spranger", spcmd2},
-    {"KeePass", spcmd3},
+    {"keepassxc", spcmd3},
     {"stalonetray", spcmd4},
 };
 
@@ -96,9 +107,13 @@ static const Rule rules[] = {
      */
 
     /* class/instance, title, tags, mask, iscentered, isfloating, monitor */
+    {"sxiv", NULL, NULL, 0, 1, 1, -1},
+    {"Sxiv", NULL, NULL, 0, 1, 1, -1},
+    {"pcmanfm", NULL, NULL, 0, 1, 1, -1},
+    {"Pcmanfm", NULL, NULL, 0, 1, 1, -1},
     {NULL, "spterm", NULL, SPTAG(0), 1, 1, -1},
     {NULL, "spfm", NULL, SPTAG(1), 1, 1, -1},
-    {"KeePass", NULL, NULL, SPTAG(2), 1, 1, -1},
+    {"KeePassXC", NULL, NULL, SPTAG(2), 1, 1, -1},
     {"stalonetray", NULL, NULL, SPTAG(3), 1, 1, -1},
 };
 
@@ -171,16 +186,15 @@ static Key keys[] = {
     {SuperMask | ShiftMask, XK_comma, tagmon, {.i = -1}},
     {SuperMask | ShiftMask, XK_period, tagmon, {.i = +1}},
 
-    {SuperMask | ShiftMask, XK_g, setgaps, {.i = +4}},
-    {SuperMask | ControlMask, XK_g, setgaps, {.i = -4}},
+    {SuperMask, XK_g, setgaps, {.i = +4}},
+    {SuperMask | ShiftMask, XK_g, setgaps, {.i = -4}},
 
     {SuperMask | AltMask | ShiftMask, XK_q, quit, {0}},
 
-    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2)
-    TAGKEYS(XK_4, 3) TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
+    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
+        TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
     /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
-    TAGKEYS(XK_0, 6)
-};
+    TAGKEYS(XK_0, 6)};
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,

@@ -20,8 +20,8 @@ width,instead of the whole bar width
  		} else {
 @@ -948,2 +948,4 @@ drawtab(Monitor *m)
  	  drw_setscheme(drw, scheme[(c == m->sel) ? SchemeTabSel : SchemeTabNorm]);
-+	  int mid = (w - horiztabpad - (int)TEXTW(c->name));
-+	  mid = mid >= horiztabpad / 2 ? mid : horiztabpad / 2;
++	  int mid = w - horiztabpad - (int)TEXTW(c->name);
++	  mid = mid >= horiztabpad ? mid : horiztabpad;
 -	  drw_text(drw, x + horiztabpad / 2, verttabpad / 2, w - horiztabpad, th - verttabpad, lrpad / 2, c->name, 0);
 + 	  drw_text(drw, x + horiztabpad / 2, verttabpad / 2, w - horiztabpad, th - verttabpad, mid, c->name, 0);
 

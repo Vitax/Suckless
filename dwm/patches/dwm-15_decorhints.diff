@@ -53,9 +53,9 @@
  	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
  	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
 +	motifatom = XInternAtom(dpy, "_MOTIF_WM_HINTS", False);
- 	/* init cursors */
- 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
- 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
+	netatom[NetDesktopViewport] = XInternAtom(dpy, "_NET_DESKTOP_VIEWPORT", False);
+	netatom[NetNumberOfDesktops] = XInternAtom(dpy, "_NET_NUMBER_OF_DESKTOPS", False);
+	netatom[NetCurrentDesktop] = XInternAtom(dpy, "_NET_CURRENT_DESKTOP", False);
 @@ -1925,6 +1937,39 @@ updategeom(void)
  	return dirty;
  }

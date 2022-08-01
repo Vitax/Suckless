@@ -3,7 +3,7 @@
 /* appearance */
 #include <tabbed.h>
 
-static char font[] = "PT Mono:pixelsize=16:antialias=true";
+static char font[] = "JetBrains Mono:pixelsize=12:antialias=true";
 
 static const int barHeight = 24;
 

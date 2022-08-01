@@ -63,7 +63,7 @@ index 5e4d494..e3662ca 100644
 +enum { SchemeNorm, SchemeSel, SchemeUrg, SchemeTabNorm, SchemeTabSel }; /* color schemes */
  enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
         NetWMFullscreen, NetActiveWindow, NetWMWindowType,
-        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+        NetWMWindowTypeDialog, NetClientList, NetDesktopNames, NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetLast }; /* EWMH atoms */
  enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 -enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
 +enum { ClkTagBar, ClkTabBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
@@ -139,7 +139,7 @@ index 5e4d494..e3662ca 100644
 +arrangemon(Monitor *m) {
 + 	m->topbar = (m->showtab && (m->lt[m->sellt]->arrange == monocle)) ? 0 : 1;
 +	updatebarpos(m);
-+ 	XMoveResizeWindow(dpy, m->tabwin, m->wx + gappx, m->ty, m->ww - 2 * gappx, th);
++ 	XMoveResizeWindow(dpy, m->tabwin, m->wx + m->gappx, m->ty, m->ww - 2 * m->gappx, th);
 + 	m->by = (m->showtab && (m->lt[m->sellt]->arrange == monocle)) ? m->by - vp : m->by + vp;
 + 	XMoveResizeWindow(dpy, m->barwin, m->wx + sp, m->by, m->ww - 2 * sp, bh);
  	strncpy(m->ltsymbol, m->lt[m->sellt]->symbol, sizeof m->ltsymbol);
@@ -154,7 +154,7 @@ index 5e4d494..e3662ca 100644
 +	if(ev->window == selmon->tabwin) {
 +		i = 0; x = 0;
 +		for(c = selmon->clients; c; c = c->next){
-+			if(!ISVISIBLE(c)) continue;
++			if(!ISVISIBLE(c) || c->isfloating) continue;
 +			x += selmon->tab_widths[i];
 +			if (ev->x > x)
 +				++i;
@@ -253,7 +253,7 @@ index 5e4d494..e3662ca 100644
 +	/* Calculates number of labels and their width */
 +	m->ntabs = 0;
 +	for(c = m->clients; c; c = c->next){
-+	  if(!ISVISIBLE(c)) continue;
++	  if(!ISVISIBLE(c) || c->isfloating) continue;
 +	  m->tab_widths[m->ntabs] = MIN((int)TEXTW(c->name) + lrpad, 250);
 +	  tot_width += m->tab_widths[m->ntabs];
 +	  ++m->ntabs;
@@ -279,7 +279,7 @@ index 5e4d494..e3662ca 100644
 +
 +	i = 0;
 +	for(c = m->clients; c; c = c->next){
-+	  if(!ISVISIBLE(c)) continue;
++	  if(!ISVISIBLE(c) || c->isfloating) continue;
 +	  if(i >= m->ntabs) break;
 +	  if(m->tab_widths[i] >  maxsize) m->tab_widths[i] = maxsize;
 +	  w = m->tab_widths[i];
@@ -423,14 +423,14 @@ index 5e4d494..e3662ca 100644
 +	}
 +
 +	for(c = m->clients; c; c = c->next) {
-+		if(ISVISIBLE(c)) ++nvis;
++		if(ISVISIBLE(c) && !c->isfloating) ++nvis;
 +	}
 +
 +	if(m->showtab == showtab_always || ((m->showtab == showtab_auto) && (nvis > 1) && (m->lt[m->sellt]->arrange == monocle))) {
 +		m->wh -= th;
 +		m->ty = m->toptab 
-+ 			? m->wy + gappx
-+ 			: m->wy + m->wh - gappx;
++ 			? m->wy + m->gappx
++ 			: m->wy + m->wh - m->gappx;
 +		m->wy = m->toptab ? m->wy + th : m->wy - th;
 +	} else {
 +		m->ty = -th;

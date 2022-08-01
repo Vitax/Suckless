@@ -4,7 +4,7 @@
  * appearance
  */
 
-static char font[] = "PT Mono:pixelsize=14:antialias=true";
+static char font[] = "JetBrainsMono Nerd Font:pixelsize=16:antialias=true";
 
 // plumber patch
 static char *plumb_cmd = "opn";
@@ -18,7 +18,7 @@ static int disableitalic = 0;
 static int disableroman = 0;
 
 // set inner padding
-static int borderpx = 32;
+static int borderpx = 16;
 
 /*
  * 1: render most of the lines/blocks characters without using the font for

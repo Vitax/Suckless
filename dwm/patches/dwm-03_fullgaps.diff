@@ -45,17 +45,16 @@ index 9fd0286..45a58f3 100644
  	m->lt[0] = &layouts[0];
  	m->lt[1] = &layouts[1 % LENGTH(layouts)];
  	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
-@@ -1498,6 +1501,16 @@ setfullscreen(Client *c, int fullscreen)
+@@ -1498,6 +1501,15 @@ setfullscreen(Client *c, int fullscreen)
  	}
  }
 
 +void
 +setgaps(const Arg *arg)
 +{
-+	if (selmon->gappx + arg->i <= gappx)
-+		selmon->gappx = gappx;
-+	else
-+		selmon->gappx += arg->i;
++	if (selmon->gappx + arg->i <= 0)
++ 		return;
++ 	selmon->gappx += arg->i;
 +	arrange(selmon);
 +}
 +
