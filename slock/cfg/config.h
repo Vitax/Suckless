@@ -1,3 +1,5 @@
+#include <slock.h>
+
 /* time in seconds to cancel lock with mouse movement */
 static const int timetocancel = 0;
 
@@ -10,13 +12,6 @@ static const char *user = "nobody";
 static const char *group = "nogroup";
 /* Fedora */
 /* static const char *group = "nobody"; */
-
-static const char *colorname[NUMCOLS] = {
-    [BACKGROUND] = "#2D2D2C", /* after initialization */
-    [INIT] = "#EDEDED",       /* after initialization */
-    [INPUT] = "#4271AE",      /* during input */
-    [FAILED] = "#D7005F",     /* wrong password */
-};
 
 /* treat a cleared input like a wrong password (color) */
 static const int failonclear = 0;

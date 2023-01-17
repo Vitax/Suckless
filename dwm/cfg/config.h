@@ -1,4 +1,3 @@
-// imports
 #include <dwm.h>
 
 #define STATUSBAR "status_info"
@@ -18,14 +17,14 @@ static const int ulineall = 0;
 /* gaps between windows */
 static const unsigned int gappx = 16;
 /* border pixel of windows */
-static const unsigned int borderpx = 3;
+static const unsigned int borderpx = 4;
 
 /* enable bar padding */
 static const int barpadding = 0;
 /* vertical padding of bar */
-static const int vertbarpad = barpadding ? gappx / 2 : 0;
+static const int vertbarpad = barpadding ? gappx / 4 : 0;
 /* horizontal padding of bar */
-static const int horizbarpad = barpadding ? gappx : 0;
+static const int horizbarpad = barpadding ? gappx / 2 : 0;
 
 /* vertical padding of tab */
 static const int verttabpad = 4;
@@ -38,7 +37,7 @@ static const int verttxtpad = 4;
 static const int horiztxtpad = 4;
 
 /* user defined bar height */
-static const int barheight = 28;
+static const int barheight = 32;
 
 /* 0 means no bar */
 static const int showbar = 1;
@@ -64,7 +63,7 @@ static const int showtab = showtab_auto;
 static const int toptab = 1;
 
 static const char *fonts[] = {
-    "Fantasque Sans Mono:pixelsize=18:antialias=true",
+    "JetBrains Mono:pixelsize=16:antialias=true",
     "JetBrainsMono Nerd Font:pixelsize=18:antialias=true",
 };
 
@@ -141,7 +140,7 @@ static const Layout layouts[] = {
 
 #define TAGKEYS(KEY, TAG)                                                      \
   {SuperMask, KEY, view, {.ui = 1 << TAG}},                                    \
-      {SuperMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
+  {SuperMask | ShiftMask, KEY, tag, {.ui = 1 << TAG}},
 
 static Key keys[] = {
     /* modifier, key, function, argument */
@@ -164,7 +163,7 @@ static Key keys[] = {
     {AltMask, XK_Tab, view, {0}},
 
     {SuperMask | ShiftMask, XK_c, killclient, {0}},
-    {SuperMask, XK_F4, killclient, {0}},
+    {AltMask, XK_F4, killclient, {0}},
 
     {SuperMask | ShiftMask, XK_t, setlayout, {.v = &layouts[0]}},
     {SuperMask | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
@@ -188,11 +187,12 @@ static Key keys[] = {
 
     {SuperMask, XK_g, setgaps, {.i = +4}},
     {SuperMask | ShiftMask, XK_g, setgaps, {.i = -4}},
+    {SuperMask | ControlMask, XK_g, setgaps, {.i = 0}},
 
     {SuperMask | AltMask | ShiftMask, XK_q, quit, {0}},
 
-    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
-        TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
+    TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2)
+    TAGKEYS(XK_4, 3) TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5)
     /* TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7) TAGKEYS(XK_8, 9) */
     TAGKEYS(XK_0, 6)};
 

@@ -25,7 +25,7 @@ FREETYPELIBS = -lXft
 # Linux
 FREETYPEINC = /usr/include/freetype2
 
-INCS = -I. -I/usr/include -I${X11INC} -I${FREETYPEINC}
+INCS = -I. -I/usr/include -I${X11INC} -I${FREETYPEINC} -I/home/vitax/.cache/themes/
 
 CFLAGS = -pedantic -Wall -Os ${INCS} ${CPPFLAGS}
 LDFLAGS = -s ${LIBS}
